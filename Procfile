@@ -1,10 +1,10 @@
 # Procfile
 
 # web process
-web: npm run start
+web: bundle exec rails server -p $PORT -b 0.0.0.0
 
 # non-web process
-worker: npm run worker
+# worker: bundle exec sidekiq
 
 # release phase command
-release: db-migrate -e prod up
+release: bundle exec rails db:migrate
