@@ -50,7 +50,7 @@ RUN bundle install && \
 COPY . .
 
 # Install Node.js dependencies (if using import maps or Webpack)
-RUN yarn install --check-files
+RUN yarn install
 
 # Precompile assets for production
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
