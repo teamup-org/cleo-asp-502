@@ -49,7 +49,7 @@ COPY config/master.key /app/config/master.key
 RUN chmod 600 /app/config/master.key
 
 # Precompile assets using the real key
-RUN RAILS_MASTER_KEY=$(cat /app/config/master.key) ./bin/rails assets:precompile
+RUN RAILS_MASTER_KEY=$(cat config/master.key) ./bin/rails assets:precompile
 
 
 
