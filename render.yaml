@@ -1,6 +1,6 @@
 databases:
   - name: cleo-asp-502-database
-    databaseName: cleo-asp-502-database
+    databaseName: cleo_asp_502_database
     user: cleo_asp_502_database_user
     plan: free
 
