@@ -42,16 +42,11 @@ COPY . .
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Copy the master key
-COPY config/master.key /app/config/master.key
-
-# Ensure proper permissions
-RUN chmod 600 /app/config/master.key
+# Write RAILS_MASTER_KEY dynamically from the environment variable
+RUN echo "$RAILS_MASTER_KEY" > config/master.key && chmod 600 config/master.key
 
 # Precompile assets using the real key
-RUN RAILS_MASTER_KEY=$(cat config/master.key) ./bin/rails assets:precompile
-
-
+RUN ./bin/rails assets:precompile
 
 # Final stage for app image
 FROM base
