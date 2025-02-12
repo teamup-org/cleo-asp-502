@@ -1,0 +1,312 @@
+  [1m[35m (309.1ms)[0m  [1m[35mCREATE DATABASE "cleo_course_scheduler_development" ENCODING = 'unicode'[0m
+  [1m[35m (136.2ms)[0m  [1m[35mCREATE DATABASE "cleo_course_scheduler_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7838106588378987060)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (1.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-02-11 20:52:40.651349', '2025-02-11 20:52:40.651352') RETURNING "key"[0m
+Migrating to CreateMajors (20240916195727)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "majors" ("id" bigserial primary key, "mname" character varying(255), "cname" character varying(255), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_majors_on_mname_and_cname" ON "majors" ("mname", "cname")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916195727') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCourses (20240916204428)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "courses" ("id" bigserial primary key, "ccode" character varying(4), "cnumber" integer, "cname" character varying(255), "description" text, "credit_hours" integer DEFAULT 0, "lecture_hours" integer DEFAULT 0, "lab_hours" integer DEFAULT 0, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_courses_on_ccode_and_cnumber" ON "courses" ("ccode", "cnumber")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916204428') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStudents (20240916214648)
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "students" ("uin" serial NOT NULL PRIMARY KEY, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "enrol_year" integer, "enrol_semester" integer, "grad_year" integer, "grad_semester" integer, "major_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_de320f6fff"
+FOREIGN KEY ("major_id")
+  REFERENCES "majors" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_students_on_major_id" ON "students" ("major_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916214648') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTracks (20240916215657)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "tracks" ("course_id" integer NOT NULL, "tname" character varying(255) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_tracks_on_course_id_and_tname" ON "tracks" ("course_id", "tname")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "tracks" ADD CONSTRAINT "fk_rails_3f4f12a334"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916215657') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEmphases (20240916220033)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "emphases" ("id" bigserial primary key, "course_id" integer NOT NULL, "ename" character varying(255) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_emphases_on_course_id_and_ename" ON "emphases" ("course_id", "ename")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "emphases" ADD CONSTRAINT "fk_rails_1b327017c9"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916220033') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePrerequisites (20240916221811)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "prerequisites" ("course_id" integer, "prereq_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_course_id" ON "prerequisites" ("course_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_prereq_id" ON "prerequisites" ("prereq_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_prerequisites_on_course_id_and_prereq_id" ON "prerequisites" ("course_id", "prereq_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916221811') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStudentCourses (20240916231041)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "student_courses" ("student_id" bigint NOT NULL, "course_id" bigint NOT NULL, "sem" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_aab11897f1"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("uin")
+, CONSTRAINT "fk_rails_fee459e6de"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_student_courses_on_student_id" ON "student_courses" ("student_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_student_courses_on_course_id" ON "student_courses" ("course_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_student_courses_on_student_id_and_course_id_and_sem" ON "student_courses" ("student_id", "course_id", "sem")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240916231041') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCoreCategories (20240917034314)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "core_categories" ("course_id" integer NOT NULL, "cname" character varying(255) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_core_categories_on_course_id_and_cname" ON "core_categories" ("course_id", "cname")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "core_categories" ADD CONSTRAINT "fk_rails_8fb770b4c0"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240917034314') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDegreeRequirements (20240917041118)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "degree_requirements" ("major_id" bigint NOT NULL, "course_id" bigint NOT NULL, "sem" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_1f1558fed9"
+FOREIGN KEY ("major_id")
+  REFERENCES "majors" ("id")
+, CONSTRAINT "fk_rails_e9c45eada1"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_degree_requirements_on_major_id" ON "degree_requirements" ("major_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX "index_degree_requirements_on_course_id" ON "degree_requirements" ("course_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_degree_requirements_on_major_id_and_course_id_and_sem" ON "degree_requirements" ("major_id", "course_id", "sem")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240917041118') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateStudentLogins (20240919003548)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "student_logins" ("id" bigserial primary key, "email" character varying NOT NULL, "full_name" character varying, "uid" character varying, "avatar_url" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_student_logins_on_email" ON "student_logins" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240919003548') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RecreateTracks (20241002155951)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mDROP TABLE "tracks"[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "tracks" ("id" bigserial primary key, "tname" character varying(255) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241002155951') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RecreateEmphases (20241002182144)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "emphases"[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "emphases" ("id" bigserial primary key, "ename" character varying(255) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241002182144') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RecreateCoreCategories (20241002184438)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE "core_categories"[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "core_categories" ("id" bigserial primary key, "cname" character varying(255) NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241002184438') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCourseTracks (20241002193403)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "course_tracks" ("course_id" bigint NOT NULL, "track_id" bigint NOT NULL, "year" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_25fbd62cac"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_69da287a50"
+FOREIGN KEY ("track_id")
+  REFERENCES "tracks" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_course_tracks_on_course_id" ON "course_tracks" ("course_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_course_tracks_on_track_id" ON "course_tracks" ("track_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_course_tracks_on_course_id_and_track_id_and_year" ON "course_tracks" ("course_id", "track_id", "year")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241002193403') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCourseCoreCategory (20241002213025)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "course_core_categories" ("course_id" bigint NOT NULL, "core_category_id" bigint NOT NULL, "year" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_bdfa9a5506"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_99a6eb3225"
+FOREIGN KEY ("core_category_id")
+  REFERENCES "core_categories" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_course_core_categories_on_course_id" ON "course_core_categories" ("course_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_course_core_categories_on_core_category_id" ON "course_core_categories" ("core_category_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "idx_on_course_id_core_category_id_year_3c9f98d245" ON "course_core_categories" ("course_id", "core_category_id", "year")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241002213025') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCourseEmphasis (20241002220944)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "course_emphases" ("course_id" bigint NOT NULL, "emphasis_id" bigint NOT NULL, "year" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_2ec6816baa"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_cacebf7ae3"
+FOREIGN KEY ("emphasis_id")
+  REFERENCES "emphases" ("id")
+)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_course_emphases_on_course_id" ON "course_emphases" ("course_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_course_emphases_on_emphasis_id" ON "course_emphases" ("emphasis_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_course_emphases_on_course_id_and_emphasis_id_and_year" ON "course_emphases" ("course_id", "emphasis_id", "year")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241002220944') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RecreateDegreeRequirements (20241003043732)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "degree_requirements"[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "degree_requirements" ("course_id" bigint NOT NULL, "major_id" bigint NOT NULL, "year" integer NOT NULL, "sem" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_e9c45eada1"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_1f1558fed9"
+FOREIGN KEY ("major_id")
+  REFERENCES "majors" ("id")
+)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_degree_requirements_on_course_id" ON "degree_requirements" ("course_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_degree_requirements_on_major_id" ON "degree_requirements" ("major_id")[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_degree_requirements_on_course_id_and_major_id_and_year" ON "degree_requirements" ("course_id", "major_id", "year")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241003043732') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RecreatePrerequisites (20241003135610)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE "prerequisites"[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "prerequisites" ("course_id" bigint NOT NULL, "prereq_id" bigint NOT NULL, "equi_id" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_3df93a6718"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_6d08c6abfe"
+FOREIGN KEY ("prereq_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_course_id" ON "prerequisites" ("course_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_prerequisites_on_prereq_id" ON "prerequisites" ("prereq_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_prerequisites_on_course_id_and_prereq_id_and_equi_id" ON "prerequisites" ("course_id", "prereq_id", "equi_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241003135610') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangePrimaryKeyInStudents (20241003180455)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE "student_courses"[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "students" DROP COLUMN "uin"[0m
+  [1m[35m (6.2ms)[0m  [1m[35mALTER TABLE "students" ADD "google_id" serial NOT NULL PRIMARY KEY[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "students" ADD "is_admin" boolean DEFAULT FALSE NOT NULL[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "student_courses" ("student_id" bigint NOT NULL, "course_id" bigint NOT NULL, "sem" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_aab11897f1"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("google_id")
+, CONSTRAINT "fk_rails_fee459e6de"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_student_courses_on_student_id" ON "student_courses" ("student_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_student_courses_on_course_id" ON "student_courses" ("course_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_student_courses_on_student_id_and_course_id" ON "student_courses" ("student_id", "course_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241003180455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeCourseCodeLengthInCourses (20241004194207)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "courses" DROP COLUMN "ccode"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "courses" ADD "ccode" character varying(30)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241004194207') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIsAdminToStudentLogins (20241008181507)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "student_logins" ADD "is_admin" boolean DEFAULT FALSE NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241008181507') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCoursesMajors (20241010201846)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "courses_majors" ("id" bigserial primary key, "course_id" bigint NOT NULL, "major_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_a539ac74ea"
+FOREIGN KEY ("course_id")
+  REFERENCES "courses" ("id")
+, CONSTRAINT "fk_rails_6efa8cc6d3"
+FOREIGN KEY ("major_id")
+  REFERENCES "majors" ("id")
+)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_courses_majors_on_course_id" ON "courses_majors" ("course_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_courses_majors_on_major_id" ON "courses_majors" ("major_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241010201846') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTrackIdToStudents (20241010213008)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "students" ADD "track_id" bigint[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_students_on_track_id" ON "students" ("track_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "students" ADD CONSTRAINT "fk_rails_71510987b4"
+FOREIGN KEY ("track_id")
+  REFERENCES "tracks" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241010213008') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEmphasisIdToStudents (20241010213020)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "students" ADD "emphases_id" bigint[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_students_on_emphases_id" ON "students" ("emphases_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "students" ADD CONSTRAINT "fk_rails_209d0684f8"
+FOREIGN KEY ("emphases_id")
+  REFERENCES "emphases" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241010213020') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DropForeignKeyFromStudentCourses (20241010220818)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mALTER TABLE "student_courses" DROP CONSTRAINT "fk_rails_aab11897f1"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241010220818') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeGoogleIdToStringInStudents (20241010220923)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.8ms)[0m  [1m[35mALTER TABLE "students" ALTER COLUMN "google_id" TYPE character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241010220923') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCoursesStudents (20241011170730)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "courses_students" ("course_id" bigint, "student_id" bigint)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_courses_students_on_course_id" ON "courses_students" ("course_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_courses_students_on_student_id" ON "courses_students" ("student_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241011170730') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenameEmphasesIdToEmphasisId (20241011215135)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "students" RENAME COLUMN "emphases_id" TO "emphasis_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_students_on_emphases_id" RENAME TO "index_students_on_emphasis_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241011215135') RETURNING "version"[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to EditPrimaryKeyInStudents (20241015015653)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "student_courses"[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE "students"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "students" ("google_id" character varying NOT NULL PRIMARY KEY, "first_name" character varying(255), "last_name" character varying(255), "email" character varying(255), "enrol_year" integer, "enrol_semester" integer, "grad_year" integer, "grad_semester" integer, "major_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "is_admin" boolean DEFAULT FALSE NOT NULL, "track_id" bigint, "emphases_id" bigint)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_students_on_emphases_id" ON "students" ("emphases_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_students_on_major_id" ON "students" ("major_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_students_on_track_id" ON "students" ("track_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "student_courses" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "student_courses" ("student_id" character varying NOT NULL, "course_id" bigint NOT NULL, "sem" integer NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_student_courses_on_course_id" ON "student_courses" ("course_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_student_courses_on_student_id_and_course_id" ON "student_courses" ("student_id", "course_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_student_courses_on_student_id" ON "student_courses" ("student_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "student_courses" ADD CONSTRAINT "fk_rails_aab11897f1"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("google_id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241015015653') RETURNING "version"[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to FixStudentEmphasisId (20241015073032)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "students" RENAME COLUMN "emphases_id" TO "emphasis_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "index_students_on_emphases_id" RENAME TO "index_students_on_emphasis_id"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241015073032') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexToCourses (20241026203159)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_courses_on_ccode_and_cnumber" ON "courses" ("ccode", "cnumber")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20241026203159') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7838106588378987060)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Set [36mCLEO_COURSE_SCHEDULER_DATABASE_PASSWORD[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
