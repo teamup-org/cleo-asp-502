@@ -9,3 +9,5 @@ config/credentials.yml.enc
 
 # Ignore other sensitive files
 .secret
+
+/config/master.key
