@@ -7,11 +7,11 @@ databases:
 services:
   - type: web
     name: 502-asp
-    runtime: ruby
+    runtime: docker
     plan: free
-    buildCommand: "./bin/render-build.sh"
+    buildCommand: "docker build -t 502-asp ." # Build the Docker image
+    startCommand: "docker run -p 3000:3000 502-asp"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "bundle exec rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
