@@ -20,6 +20,8 @@ module CleoCourseScheduler
     # Configuration for the application, engines, and railties goes here.
     #
     puts "Looking for: #{File.expand_path('config/initializers/assets.rb', __dir__)}"
+    puts "Rails.root: #{Rails.root}"
+    puts "Expected path: #{File.expand_path('config/initializers/assets.rb', Rails.root)}"
 
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
