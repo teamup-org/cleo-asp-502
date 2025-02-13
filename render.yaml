@@ -9,9 +9,8 @@ services:
     name: 502-asp
     runtime: docker
     plan: free
-    buildCommand: "docker build -t 502-asp ." # Build the Docker image
-    startCommand: "docker run -p 3000:3000 502-asp"
-    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    buildCommand: "docker build -t myapp ."
+    startCommand: "docker run -p 3000:3000 myapp"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
