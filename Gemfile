@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'importmap-rails'
 gem 'jbuilder'
+gem 'mini_racer', platforms: :ruby
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.2.1'
@@ -19,7 +20,6 @@ gem 'bootsnap', require: false
 gem 'bootstrap', '~> 5.0.0'
 gem 'devise'
 gem 'dotenv-rails', groups: %i[development test]
-gem 'mini_racer'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
