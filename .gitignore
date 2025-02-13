@@ -1,0 +1,13 @@
+# Ignore Rails master key (used for encrypted credentials)
+config/master.key
+
+# Ignore Rails credentials file
+config/credentials.yml.enc
+
+# Ignore environment files
+.env
+
+# Ignore other sensitive files
+.secret
+
+/config/master.key
