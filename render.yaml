@@ -3,7 +3,6 @@ services:
     name: 502-asp
     runtime: docker
     plan: free
-    buildCommand: bundle exec rake assets:precompile
     envVars:
       - key: DATABASE_URL
         fromDatabase:
