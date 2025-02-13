@@ -10,6 +10,8 @@ Bundler.require(*Rails.groups)
 
 module CleoCourseScheduler
   class Application < Rails::Application
+    config.paths['config/initializers'] = [File.expand_path('initializers', __dir__)]
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
@@ -19,10 +21,6 @@ module CleoCourseScheduler
     config.autoload_lib(ignore: %w[assets tasks])
     # Configuration for the application, engines, and railties goes here.
     #
-    puts "Looking for: #{File.expand_path('config/initializers/assets.rb', __dir__)}"
-    puts "Rails.root: #{Rails.root}"
-    puts "Expected path: #{File.expand_path('config/initializers/assets.rb', Rails.root)}"
-
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
