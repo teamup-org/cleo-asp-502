@@ -12,7 +12,6 @@ gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'zeitwerk', '< 2.7.0'
-
 # Add net-pop with a specific version
 
 # Other gems...
