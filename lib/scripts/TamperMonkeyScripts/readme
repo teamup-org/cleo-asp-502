@@ -1,0 +1,13 @@
+Download TamperMonkey: https://www.tampermonkey.net/
+navigate to: https://howdy.tamu.edu/uPortal/p/public-class-search-ui.ctf3/max/render.uP
+
+To run copy the scripts into tamper monkey and activate the scrpits using the tamper monkey extension. Refresh the page to get the script to run. Make sure to turn the scripts off when you are not using them.
+
+get_course_data:
+Will intercept the initial POST to get the table data and download the JSON. Table data will not load when this scripts is running.
+
+get_course_specifics:
+Will scroll down the table after a delay and click each course link, getting information not present in the initial POST reponse.
+This takes a very long time as the table will start to load slowly, so dont do the whole course list at once.
+
+One the JSON is downloaded use the webdata.js in scrpits/jsonToCsv/ convert to csv, or space the json to be more readable. Currently in the /newData/ folder the csv is split by description and prereqs, with the current TamperMonkey script this is not nessisary.
