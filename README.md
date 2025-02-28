@@ -191,6 +191,11 @@ Below lists the members who contributed to this project:
 - Vincent Tran
 - Tatiana Fern
 - Neale Tham
+- James Shepherd
+- Margo Gongora
+- Claire Bennett
+- Jensyn Huynh
+- Josh Robert
 
 ## References
 
