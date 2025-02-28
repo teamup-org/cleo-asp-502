@@ -18,7 +18,7 @@
         <h3>Semester <%= sem %></h3>
         
         <%# Display courses for this semester %>
-        <% courses_in_semester = @student_courses.select { |sc| sc.semester == sem } %>
+        <% courses_in_semester = @student_courses.select { |sc| sc.sem == sem } %>
         
         <% if courses_in_semester.any? %>
           <table>

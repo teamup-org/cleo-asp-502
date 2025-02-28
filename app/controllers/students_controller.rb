@@ -89,6 +89,14 @@ class StudentsController < ApplicationController
     redirect_to root_path, alert: 'Student not found.'
   end
 
+  def transcript
+    @student = Student.find_by(google_id: current_student_login.uid)
+
+    return unless @student.nil?
+
+    redirect_to root_path, alert: 'Student not found.'
+  end
+
   def degree_planner
     redirect_to student_degree_planner_path(current_student_login.uid)
   end

@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Transcript courses" %>
+
+<h1>Transcript courses</h1>
+
+<div id="transcript_courses">
+  <% @transcript_courses.each do |transcript_course| %>
+    <%= render transcript_course %>
+    <p>
+      <%= link_to "Show this transcript course", transcript_course %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New transcript course", new_transcript_course_path %>

@@ -1,0 +1,12 @@
+<% content_for :title, "Editing transcript course" %>
+
+<h1>Editing transcript course</h1>
+
+<%= render "form", transcript_course: @transcript_course %>
+
+<br>
+
+<div>
+  <%= link_to "Show this transcript course", @transcript_course %> |
+  <%= link_to "Back to transcript courses", transcript_courses_path %>
+</div>
