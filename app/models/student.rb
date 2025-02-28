@@ -30,7 +30,7 @@ class Student < ApplicationRecord
 
 
   # Transcript courses association
-  has_many :transcript_courses, dependent: :destory
+  has_many :transcript_courses, dependent: :destroy
   has_many :courses, through: :transcript_courses
 
   belongs_to :major

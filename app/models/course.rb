@@ -46,5 +46,4 @@ class Course < ApplicationRecord
   def full_title
     "#{ccode} #{cnumber}"
   end
-
 end
