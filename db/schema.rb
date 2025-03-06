@@ -10,9 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_26_203159) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_04_035111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "class_attributes", force: :cascade do |t|
+    t.integer "crn"
+    t.string "class_type"
+    t.string "is_online"
+    t.string "instructor"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_class_attributes_on_course_id"
+  end
+
+  create_table "class_meeting_attributes", force: :cascade do |t|
+    t.boolean "sunday"
+    t.boolean "monday"
+    t.boolean "tuesday"
+    t.boolean "wednesday"
+    t.boolean "thursday"
+    t.boolean "friday"
+    t.boolean "saturday"
+    t.time "start_time"
+    t.time "end_time"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "location"
+    t.string "meeting_type"
+    t.bigint "class_attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["class_attribute_id"], name: "index_class_meeting_attributes_on_class_attribute_id"
+  end
 
   create_table "core_categories", force: :cascade do |t|
     t.string "cname", limit: 255, null: false
@@ -166,6 +197,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_26_203159) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "class_attributes", "courses"
+  add_foreign_key "class_meeting_attributes", "class_attributes"
   add_foreign_key "course_core_categories", "core_categories"
   add_foreign_key "course_core_categories", "courses"
   add_foreign_key "course_emphases", "courses"

@@ -20,8 +20,8 @@ class EditPrimaryKeyInStudents < ActiveRecord::Migration[7.2]
       t.datetime 'created_at', null: false
       t.datetime 'updated_at', null: false
       t.boolean 'is_admin', default: false, null: false
-      t.bigint 'track_id'
-      t.bigint 'emphases_id'
+      t.bigint 'track_id',
+      t.bigint 'emphasis_id', 
 
       # Add indexes for performance
       t.index ['emphases_id'], name: 'index_students_on_emphases_id'
