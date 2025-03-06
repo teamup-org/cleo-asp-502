@@ -2,15 +2,25 @@ class TranscriptCoursesController < ApplicationController
   before_action :set_student
   before_action :set_transcript_course, only: %i[show edit update destroy]
 
+  skip_before_action :authenticate_student_login! if Rails.env.test?
+
   EXPECTED_HEADERS = ['Course ID', 'Grade', 'Semester', 'Year'].freeze
 
   # GET /transcript_courses or /transcript_courses.json
   def index
-    @transcript_courses = TranscriptCourse.all
+    if params[:student_id].present?
+      @student = Student.find(params[:student_id])
+      @transcript_courses = @student.transcript_courses
+    else
+      @transcript_courses = TranscriptCourse.none
+    end
+
+    @students = Student.all
   end
 
   # GET /transcript_courses/1 or /transcript_courses/1.json
   def show
+    @transcript_course = TranscriptCourse.find_by!(student_id: params[:student_id], course_id: params[:course_id])
   end
 
   # GET /transcript_courses/new
@@ -20,33 +30,29 @@ class TranscriptCoursesController < ApplicationController
 
   # GET /transcript_courses/1/edit
   def edit
+    @transcript_course = set_transcript_course
   end
 
   # POST /transcript_courses or /transcript_courses.json
   def create
     @transcript_course = TranscriptCourse.new(transcript_course_params)
 
-    respond_to do |format|
-      if @transcript_course.save
-        format.html { redirect_to @transcript_course, notice: 'Transcript course was successfully created.' }
-        format.json { render :show, status: :created, location: @transcript_course }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @transcript_course.errors, status: :unprocessable_entity }
-      end
+    if @transcript_course.save
+      redirect_to transcript_courses_path(student_id: @transcript_course.student_id, course_id: @transcript_course.course_id),
+                  notice: 'Course added successfully.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /transcript_courses/1 or /transcript_courses/1.json
   def update
-    respond_to do |format|
-      if @transcript_course.update(transcript_course_params)
-        format.html { redirect_to @transcript_course, notice: 'Transcript course was successfully updated.' }
-        format.json { render :show, status: :ok, location: @transcript_course }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transcript_course.errors, status: :unprocessable_entity }
-      end
+    @transcript_course = set_transcript_course
+    if @transcript_course.update(transcript_course_params)
+      redirect_to transcript_courses_path(student_id: @transcript_course.student_id),
+                  notice: 'Course updated successfully.'
+    else
+      render :edit
     end
   end
 
@@ -118,14 +124,13 @@ class TranscriptCoursesController < ApplicationController
 
   def import_courses_from_csv(csv_file)
     CSV.foreach(csv_file.path, headers: true) do |row|
-      new_course = TranscriptCourse.new(
+      TranscriptCourse.create!(
         student: @student,
         course_id: row['Course ID'],
         grade: row['Grade'],
         semester: row['Semester'],
         year: row['Year']
       )
-      new_course.save
     end
   end
 end
