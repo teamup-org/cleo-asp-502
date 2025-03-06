@@ -3,9 +3,10 @@
 class Course < ApplicationRecord
   # Validations
   validates :ccode, :cnumber, presence: true
-  validates :credit_hours, :lecture_hours, :lab_hours, :cnumber, numericality: { only_integer: true }
-  validates :ccode, length: { minimum: 4, maximimum: 30 }
+  validates :credit_hours, :lecture_hours, :lab_hours, numericality: { only_integer: true }
+  validates :ccode, length: { minimum: 1, maximimum: 30 }
   validates :ccode, uniqueness: { scope: :cnumber }
+  validates :cnumber, presence: true
 
   # Prerequisites associations
   has_many :prerequisites, foreign_key: :course_id
@@ -35,6 +36,8 @@ class Course < ApplicationRecord
 
   has_many :degree_requirements
 
+  #class association
+  has_many :class_attributes
   def prerequisite_groups
     prerequisites.includes(:prereq).group_by(&:equi_id).transform_values { |prereqs| prereqs.map(&:prereq) }
   end
