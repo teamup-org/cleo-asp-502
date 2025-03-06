@@ -1,0 +1,66 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% content_for :title, "Transcript" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="student-transcript">  
+  <%= render 'shared/navbar_student' %>
+  <h1><%= @student.first_name %>'s Transcript</h1>
+
+  <div class="student-transcript-courses">
+  <table>
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Grade</th>
+        <th>Semester</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @student.transcript_courses.each do |course| %>
+      <tr>
+        <td><%= course.course.ccode%> <%= course.course.cnumber%></td>
+        <td><%= course.grade %></td>
+        <td><%= course.semester %></td>
+        <td><%= course.year %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+
+  <div>
+  <%= form_with url: upload_transcript_student_transcript_courses_path(@student), method: :post, html: { multipart: true } do |f |%>
+      <div class="form-group">
+          <%= label_tag :file, "Upload CSV" %>
+          <%= file_field_tag :file, class: 'form-control' %>
+      </div>
+      <div class="button-group">
+          <%= f.submit "Upload Transcript", class: "action-button upload-button", data: { confirm: 'This will replace your current transcript. Are you sure?' }%>
+      </div>
+  <% end %>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const avatar = document.getElementById('avatar');
+      const dropdownMenu = document.getElementById('dropdown-menu');
+
+      // Toggle dropdown visibility
+      avatar.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('profile-show');
+      });
+
+      // Hide dropdown if clicking outside
+      document.addEventListener('click', function(event) {
+        if (!avatar.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.classList.remove('profile-show');
+        }
+      });
+    });
+  </script>
+</body>
