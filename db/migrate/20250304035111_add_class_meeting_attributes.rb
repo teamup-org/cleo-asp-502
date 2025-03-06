@@ -1,5 +1,5 @@
 class AddClassMeetingAttributes < ActiveRecord::Migration[7.2]
-  def change
+  def up
     create_table :class_meeting_attributes do |t|
       t.boolean :sunday
       t.boolean :monday
@@ -18,6 +18,9 @@ class AddClassMeetingAttributes < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+  end
+  def down
+    drop_table :class_meeting_attributes
   end
 
 end

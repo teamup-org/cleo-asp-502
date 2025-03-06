@@ -234,8 +234,8 @@ class DegreePlannerController < ApplicationController
     CSV.foreach(file.path, headers: true) do |row|
       StudentCourse.create(
         student: @student,
-        course_id: row['Course ID'],
-        sem: row['Semester']
+        sem: row['Semester'],
+        course: Course.find_by(ccode: row['Course Code'], cnumber: row['Course Number'])
       )
     end
   end
