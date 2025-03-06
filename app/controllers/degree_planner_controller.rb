@@ -12,7 +12,6 @@ class DegreePlannerController < ApplicationController
     @course_prerequisite_status = check_prerequisites(@student, @student_courses)
     @emphasis_options = Emphasis.all.pluck(:ename)
     @track_options = Track.all.pluck(:tname)
-    
   end
 
   def add_course
@@ -61,8 +60,6 @@ class DegreePlannerController < ApplicationController
       flash[:error] = "Invalid course ID or semester value: Course ID - #{selected_course_id}, Semester - #{semester}"
     end
 
-    
-
     redirect_to student_degree_planner_path(@student)
   end
 
@@ -84,7 +81,8 @@ class DegreePlannerController < ApplicationController
 
   # In DegreePlannerController
   def generate_custom_plan
-    planner_service = DegreePlannerService.new(@student, params[:interests][:emphasis_area], params[:interests][:track_area])
+    planner_service = DegreePlannerService.new(@student, params[:interests][:emphasis_area],
+                                               params[:interests][:track_area])
     planned_courses = planner_service.generate_plan
 
     # Clear existing courses
@@ -206,37 +204,65 @@ class DegreePlannerController < ApplicationController
 
   # ======== Helper functions for uploading / downloading csv files ========
   def process_csv(file)
+    puts 'Reading CSV file...'
     csv_file = read_csv(file)
+    puts "CSV file read successfully: #{csv_file.inspect}"
 
     if valid_csv?(csv_file)
+      puts 'CSV file format is valid. Proceeding to import...'
       destroy_student_courses
       import_courses_from_csv(file)
       flash[:success] = 'Degree plan uploaded successfully'
     else
+      puts "CSV format validation failed. Headers: #{csv_file.headers}"
       flash[:error] = "CSV format is incorrect. Please ensure the file has headers: #{EXPECTED_HEADERS.join(', ')}."
     end
 
     redirect_to student_degree_planner_path(@student)
-  rescue StandardError
+  rescue StandardError => e
+    puts "ERROR: #{e.message}"
+    puts e.backtrace.join("\n")
     flash[:error] = 'The CSV file is malformed or unreadable. Please upload a valid CSV file.'
     redirect_to student_degree_planner_path(@student)
   end
 
   def read_csv(file)
-    CSV.read(file.path, headers: true)
+    csv_content = File.read(file.path)
+    puts "CSV Content: \n#{csv_content}"
+    CSV.parse(csv_content, headers: true)
+  rescue CSV::MalformedCSVError => e
+    puts "CSV Parsing Error: #{e.message}"
+    nil
   end
 
   def valid_csv?(csv_file)
-    (csv_file.headers & EXPECTED_HEADERS).size == EXPECTED_HEADERS.size
+    headers = csv_file.headers.map(&:strip)
+    puts "Detected CSV Headers: #{headers}"
+    headers == EXPECTED_HEADERS
   end
 
   def import_courses_from_csv(file)
     CSV.foreach(file.path, headers: true) do |row|
-      StudentCourse.create(
+      puts "Processing row: #{row.to_h.inspect}"
+
+      course = Course.find_by(ccode: row['Course Code'], cnumber: row['Course Number'])
+
+      if course.nil?
+        puts "Course not found for: #{row['Course Code']} #{row['Course Number']}"
+        next
+      end
+
+      student_course = StudentCourse.new(
         student: @student,
-        course_id: row['Course ID'],
+        course_id: course.id,
         sem: row['Semester']
       )
+
+      if student_course.save
+        puts "Saved successfully: #{student_course.inspect}"
+      else
+        puts "Validation errors: #{student_course.errors.full_messages.join(', ')}"
+      end
     end
   end
   # ========================================================================

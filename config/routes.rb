@@ -91,6 +91,7 @@ Rails.application.routes.draw do
 
     resource :degree_planner, only: [:show], controller: 'degree_planner' do
       patch :update_plan, on: :member
+      patch 'add_course', to: 'degree_planners#add_course', on: :member
       post :generate_custom_plan, on: :member
       delete 'remove_course', on: :member
       get :download_plan, on: :member
