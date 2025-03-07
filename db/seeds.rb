@@ -48,6 +48,7 @@ CSV.foreach(all_classes_path, headers: true) do |row|
   ClassAttribute.find_or_create_by!(
     crn: row['crn'],
     course: course,
+    honors: row['honors'] == 'T' ? true : false,
   )
 end
 

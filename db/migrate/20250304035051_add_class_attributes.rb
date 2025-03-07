@@ -5,6 +5,7 @@ class AddClassAttributes < ActiveRecord::Migration[7.2]
       t.string :class_type
       t.string :is_online
       t.string :instructor
+      t.boolean :honors
       t.references :course, null: false, foreign_key: true
 
       t.timestamps

@@ -30,7 +30,7 @@ class AddCourseDescriptions < ActiveRecord::Migration[7.2]
       if course
         course.update(description: description)
       else
-        puts "Course not found: #{cnumber} - #{ccode}"
+        #puts "Course not found: #{cnumber} - #{ccode}"
       end
     end
   end
