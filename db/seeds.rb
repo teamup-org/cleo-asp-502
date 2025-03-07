@@ -27,63 +27,16 @@ tracks_csv = Rails.root.join('lib', 'data', 'manual', 'tracks.csv')
 emphasis_csv = Rails.root.join('lib', 'data', 'manual', 'emphasis.csv')
 emphasis_courses_csv = Rails.root.join('lib', 'data', 'manual', 'emphasis_courses.csv')
 
-
-main_course_path = Rails.root.join('lib', 'data','newData','csv', 'allCourses.csv')
-return unless File.exist?(main_course_path) 
-CSV.foreach(main_course_path, headers:true) do |row|
+# Seed with courses
+CSV.foreach(courses_csv, headers: true) do |row|
   Course.find_or_create_by(
-    cnumber: row['cnumber'],
     ccode: row['ccode'],
+    cnumber: row['cnumber'],
     cname: row['cname'],
+    description: row['description'],
     credit_hours: row['credit_hours'],
-  )
-end
-
-all_classes_path = Rails.root.join('lib', 'data','newData','csv', 'allClassesSpring2025.csv')
-
-# Seed with classes
-return unless File.exist?(all_classes_path) 
-CSV.foreach(all_classes_path, headers: true) do |row|
-  course = Course.find_or_create_by!(ccode: row['ccode'], cnumber: row['cnumber'])
-  ClassAttribute.find_or_create_by!(
-    crn: row['crn'],
-    course: course,
-  )
-end
-
-all_meetings_path = Rails.root.join('lib', 'data','newData','csv', 'allClassMeetings.csv')
-
-# Seed with classtimes
-return unless File.exist?(all_meetings_path) 
-CSV.foreach(all_meetings_path, headers: true) do |row|
-  klass = ClassAttribute.find_or_create_by!(crn: row['crn'])
-  if klass.nil?
-    puts "Skipping row: CRN #{row['crn']} not found in ClassAttributes"
-    next
-  end
-  start_date = row['start_date'].present? ? Date.strptime(row['start_date'], '%m/%d/%Y') : nil
-  end_date = row['end_date'].present? ? Date.strptime(row['end_date'], '%m/%d/%Y') : nil
-
-  start_time = row['start_time'].present? && row['start_time'] != 'null' ? Time.strptime(row['start_time'], '%I:%M %p') : nil
-  end_time = row['end_time'].present? && row['end_time'] != 'null' ? Time.strptime(row['end_time'], '%I:%M %p') : nil
-  
-  day_hash = {'U'=> true, 'M'=> true, 'T'=> true, 'W'=> true, 'R'=> true, 'F'=> true, 'S'=> true}
-
-  ClassMeetingAttribute.find_or_create_by!(
-    sunday: day_hash.key?(row['sunday']) ? true : false,
-    monday: day_hash.key?(row['monday']) ? true : false,
-    tuesday: day_hash.key?(row['tuesday']) ? true : false,
-    wednesday: day_hash.key?(row['wednesday']) ? true : false,
-    thursday: day_hash.key?(row['thursday']) ? true : false,
-    friday: day_hash.key?(row['friday']) ? true : false,
-    saturday: day_hash.key?(row['saturday']) ? true : false,
-    start_time: start_time,
-    end_time: end_time,
-    start_date: start_date,
-    end_date: end_date,
-    location: row['location'],
-    meeting_type: row['meeting_type'],
-    class_attribute: klass, # Correct association reference
+    lecture_hours: row['lecture_hours'],
+    lab_hours: row['lab_hours']
   )
 end
 
