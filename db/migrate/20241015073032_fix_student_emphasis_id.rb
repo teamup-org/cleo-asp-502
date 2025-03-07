@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixStudentEmphasisId < ActiveRecord::Migration[7.2]
   def up
     unless column_exists?(:students, :emphasis_id)

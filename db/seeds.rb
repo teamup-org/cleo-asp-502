@@ -27,14 +27,13 @@ tracks_csv = Rails.root.join('lib', 'data', 'manual', 'tracks.csv')
 emphasis_csv = Rails.root.join('lib', 'data', 'manual', 'emphasis.csv')
 emphasis_courses_csv = Rails.root.join('lib', 'data', 'manual', 'emphasis_courses.csv')
 
-
-main_course_path = Rails.root.join('lib', 'data','newData','csv', 'allCourses.csv')
-return unless File.exist?(main_course_path) 
-CSV.foreach(main_course_path, headers:true) do |row|
+# Seed with courses
+CSV.foreach(courses_csv, headers: true) do |row|
   Course.find_or_create_by(
-    cnumber: row['cnumber'],
     ccode: row['ccode'],
+    cnumber: row['cnumber'],
     cname: row['cname'],
+    description: row['description'],
     credit_hours: row['credit_hours'],
   )
 end

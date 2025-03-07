@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_26_203159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
   create_table "courses", force: :cascade do |t|
     t.integer "cnumber"
     t.string "cname", limit: 255
+    t.text "description"
     t.text "description"
     t.integer "credit_hours", default: 0
     t.integer "lecture_hours", default: 0
@@ -188,6 +189,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
     t.bigint "track_id"
     t.bigint "emphasis_id"
     t.index ["emphasis_id"], name: "index_students_on_emphasis_id"
+    t.bigint "emphasis_id"
+    t.index ["emphasis_id"], name: "index_students_on_emphasis_id"
     t.index ["major_id"], name: "index_students_on_major_id"
     t.index ["track_id"], name: "index_students_on_track_id"
   end
@@ -198,8 +201,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "class_attributes", "courses"
-  add_foreign_key "class_meeting_attributes", "class_attributes"
   add_foreign_key "course_core_categories", "core_categories"
   add_foreign_key "course_core_categories", "courses"
   add_foreign_key "course_emphases", "courses"

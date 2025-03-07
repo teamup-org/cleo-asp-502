@@ -254,9 +254,8 @@ class DegreePlannerController < ApplicationController
 
       student_course = StudentCourse.new(
         student: @student,
-        sem: row['Semester'],
-        course: Course.find_by(ccode: row['Course Code'], cnumber: row['Course Number'])
-
+        course_id: course.id,
+        sem: row['Semester']
       )
 
       if student_course.save
