@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateDegreeRequirements < ActiveRecord::Migration[7.2]
-  def change
+  def up
     create_table :degree_requirements, id: false do |t|
       t.belongs_to :major, null: false, foreign_key: true
       t.belongs_to :course, null: false, foreign_key: true
@@ -11,4 +11,7 @@ class CreateDegreeRequirements < ActiveRecord::Migration[7.2]
 
     add_index :degree_requirements, %i[major_id course_id sem], unique: true
   end
+  def down  
+    drop_table :degree_requirements
+end
 end
