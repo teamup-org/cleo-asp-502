@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateCourses < ActiveRecord::Migration[7.2]
-  def change
+  def up
     create_table :courses do |t|
       t.string :ccode, limit: 4
       t.integer :cnumber
@@ -15,5 +15,10 @@ class CreateCourses < ActiveRecord::Migration[7.2]
     end
 
     add_index :courses, %i[ccode cnumber], unique: true
+  end
+  def down
+    if table_exists?(:courses)
+    drop_table :courses
+    end
   end
 end
