@@ -88,13 +88,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
   create_table "courses", force: :cascade do |t|
     t.integer "cnumber"
     t.string "cname", limit: 255
+    t.text "description"
     t.integer "credit_hours", default: 0
     t.integer "lecture_hours", default: 0
     t.integer "lab_hours", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccode", limit: 30
-    t.text "description"
     t.index ["ccode", "cnumber"], name: "index_courses_on_ccode_and_cnumber", unique: true
   end
 

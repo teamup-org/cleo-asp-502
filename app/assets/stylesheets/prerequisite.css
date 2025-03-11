@@ -1,0 +1,11 @@
+.prerequisite.taken {
+    color: green;
+  }
+  
+  .prerequisite.planned {
+    color: orange;
+  }
+  
+  .prerequisite.not_planned {
+    color: red;
+  }
