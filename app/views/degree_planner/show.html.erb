@@ -95,6 +95,9 @@
                     class: 'remove-course-button' 
                   %>
                 </td>
+                <td>
+                  Earliest Semester: <%= @earliest_semesters[student_course.course.id] %>
+                </td>
               </tr>
             <% end %>
           </tbody>
