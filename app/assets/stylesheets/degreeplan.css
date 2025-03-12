@@ -569,7 +569,7 @@
 
 .prerequisite-warning-icon {
     margin-left: 5px;
-    cursor: help;
+    color: red; /* Red color for the warning icon */
 }
 
 .prerequisite-tooltip {
@@ -593,4 +593,51 @@
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+.prerequisite.taken {
+    color: green;
+}
+
+.prerequisite.planned {
+    color: orange;
+}
+
+.prerequisite.not_planned {
+    color: red;
+}
+
+.info-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 0.9em;
+    color: #007bff; /* Blue color for the icon */
+}
+  
+.info-icon:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+.custom-tooltip {
+    position: absolute;
+    background-color: white; /* White background */
+    border: 1px solid #ddd;
+    color: black; /* Black text */
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    z-index: 1000;
+    pointer-events: none;
+    max-width: 300px; /* Limit tooltip width */
+    white-space: normal; /* Allow text to wrap */
+    border: 1px solid #ccc; /* Add a border for better visibility */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+  
+.prerequisite-group {
+    margin-bottom: 5px;
+}
+  
+.prerequisite-group strong {
+    font-weight: bold;
 }

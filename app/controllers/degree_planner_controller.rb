@@ -16,6 +16,13 @@ class DegreePlannerController < ApplicationController
     @student_courses.each do |student_course|
       @earliest_semesters[student_course.course.id] = earliest_semester_for_course(@student, student_course.course)
     end
+
+    # Calculate tooltip content for each course
+    @tooltip_contents = {}
+    @course_prerequisite_status.each do |course_status|
+      student_course = course_status[:student_course]
+      @tooltip_contents[student_course.course.id] = tooltip_content(student_course, course_status)
+    end
     
     @emphasis_options = Emphasis.all.pluck(:ename)
     @track_options = Track.all.pluck(:tname)
@@ -230,6 +237,27 @@ class DegreePlannerController < ApplicationController
     end
   
     earliest_semester
+  end
+
+  def tooltip_content(student_course, course_status)
+    earliest_semester = earliest_semester_for_course(@student, student_course.course)
+    content = "<div class='tooltip-content'>"
+    content += "<strong>Earliest Semester:</strong> #{earliest_semester}<br><br>"
+    content += "<strong>Prerequisites:</strong><br>"
+  
+    course_status[:prerequisite_status].each do |group|
+      content += "<div class='prerequisite-group'>"
+      content += "Need one of:<br>"
+      group[:courses].each do |prereq|
+        content += "<div class='prerequisite #{prereq[:status]}'>"
+        content += "- #{prereq[:course].ccode} #{prereq[:course].cnumber}: #{prereq[:course].cname} (#{prereq[:status]})"
+        content += "</div>"
+      end
+      content += "</div>"
+    end
+  
+    content += "</div>"
+    content.html_safe
   end
 
   # ======== Helper functions for uploading / downloading csv files ========
