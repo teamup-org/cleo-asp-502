@@ -184,17 +184,22 @@ class DegreePlannerController < ApplicationController
       course = student_course.course
       current_semester = student_course.sem
   
+      # Get all courses planned in previous semesters
       previous_courses = courses_by_semester
-                         .select { |sem, _| sem <= current_semester }
+                         .select { |sem, _| sem < current_semester } # Only semesters before the current one
                          .values
                          .flatten
                          .map(&:course)
   
+      # Get prerequisite groups for the current course
       prereq_groups = course.prerequisite_groups
   
+      # Initialize arrays to track prerequisite status and missing prerequisites
       prerequisite_status = []
+      missing_prereqs = []
   
       prereq_groups.each do |equi_id, prereq_courses|
+        # Track the status of each prerequisite in this group
         status = {
           equi_id: equi_id,
           courses: prereq_courses.map do |prereq|
@@ -210,13 +215,28 @@ class DegreePlannerController < ApplicationController
             }
           end
         }
+  
+        # Count the number of prerequisites that are not planned or not taken
+        not_planned_or_not_taken = prereq_courses.count do |prereq|
+          !previous_courses.include?(prereq) && !courses_added.map(&:course).include?(prereq)
+        end
+  
+        # If any prerequisites in this group are not planned or not taken, mark as missing
+        if not_planned_or_not_taken > 0
+          missing_prereqs << {
+            equi_id: equi_id,
+            courses: prereq_courses
+          }
+        end
+  
         prerequisite_status << status
       end
   
       {
         student_course: student_course,
         prerequisite_status: prerequisite_status,
-        prerequisites_met: prerequisite_status.all? { |group| group[:courses].any? { |c| c[:status] == 'taken' } }
+        prerequisites_met: missing_prereqs.empty?, # Prerequisites are met if no missing prerequisites
+        missing_prerequisites: missing_prereqs
       }
     end
   end
