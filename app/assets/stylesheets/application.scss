@@ -285,5 +285,34 @@ th {
 .navbar-purple .sign-out {
   margin-left: auto;
 }
+.class{
+  font-weight: bold;
+  border: 3px;
+  background-color: #f2f2f2;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.class:hover{
+  background: deepskyblue;
+}
+.classList{
+  flex-direction: row;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+
+
+}
+.schedule{
+  display:flex;
+  flex-direction: row;
+  gap: 20px;
+}
 
 @import 'select2';
