@@ -293,9 +293,18 @@ th {
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
+  flex-direction: column;
+  padding: 3px;
 }
 .class:hover{
   background: deepskyblue;
+}
+.class p
+{
+    margin-top: 0; /* Or a smaller value */
+    margin-bottom: 0; /* Or a smaller value */
+    line-height: 1.2; /* Or a value of your choice */
+
 }
 .classList{
   flex-direction: row;

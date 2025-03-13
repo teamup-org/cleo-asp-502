@@ -57,7 +57,7 @@
     <div class="degreeplan2-grid">
       <% (1..8).each do |sem| %>
         <div class="semester2-container">
-           <%= link_to "View Schedule for Student 1", schedule_path(student_id: @student.id.to_s, semester_num: sem), method: :get, class: "btn btn-primary" %> 
+           <%= link_to "View Schedule", schedule_path(student_id: @student.id.to_s, semester_num: sem), method: :get, class: "btn btn-primary" %> 
           <%# Table listing the courses assigned to this semester %>
           <table>
             <thead>

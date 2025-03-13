@@ -1,4 +1,5 @@
 <div class = "schedule">
+<%=render(partial:'current_schedule')%>
 <% @loaded_classes.each do |course, classes| %>
     <%=render(partial: 'classList',locals:{course: course, classes: classes})%>
 <%end%>

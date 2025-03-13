@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  #schedule
   get '/schedule', to: 'schedule#index', as: 'schedule'
+  post '/select_class', to: 'scheduel#select_class'
+  post '/schedule', to: 'schedule#create'
 
   devise_for :student_logins, controllers: { omniauth_callbacks: 'student_logins/omniauth_callbacks' }
 
