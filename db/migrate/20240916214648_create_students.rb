@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateStudents < ActiveRecord::Migration[7.2]
-  def change
+  def up
     create_table :students, id: false, primary_key: :uin do |t|
       t.integer :uin, null: false, primary_key: true
       t.string :first_name, limit: 255
@@ -14,6 +14,11 @@ class CreateStudents < ActiveRecord::Migration[7.2]
       t.references :major, null: false, foreign_key: true
 
       t.timestamps
+    end
+  end
+  def down
+    if table_exists?(:students)
+    drop_table :students
     end
   end
 end

@@ -35,14 +35,88 @@ CSV.foreach(courses_csv, headers: true) do |row|
     cname: row['cname'],
     description: row['description'],
     credit_hours: row['credit_hours'],
-    lecture_hours: row['lecture_hours'],
-    lab_hours: row['lab_hours']
+  )
+end
+
+#seed with all courses
+all_courses_path = Rails.root.join('lib', 'data','newData','csv', 'allCourses.csv')
+CSV.foreach(all_courses_path, headers: true) do |row|
+  Course.find_or_create_by(
+    ccode: row['ccode'],
+    cnumber: row['cnumber'],
+    cname: row['cname'],
+    credit_hours: row['credit_hours'],
+  )
+end
+
+#seed preresiquites
+all_prereq_path = Rails.root.join('lib', 'data','newData','csv', 'PrereqData.csv')
+CSV.foreach(all_prereq_path, headers: true) do |row|
+  course = Course.find_by(ccode: row['course_ccode'], cnumber: row['course_cnumber'])
+  prereq = Course.find_by(ccode: row['prereq_ccode'], cnumber: row['prereq_cnumber'])
+  if course.nil? || prereq.nil?
+    next
+  end
+  Prerequisite.find_or_create_by!(
+    course: course,
+    prereq: prereq,
+    equi_id: row['equi_id']
+  )
+end
+
+#seed with all classes
+
+
+all_classes_path = Rails.root.join('lib', 'data','newData','csv', 'allClassesSpring2025.csv')
+
+# Seed with classes
+CSV.foreach(all_classes_path, headers: true) do |row|
+  course = Course.find_or_create_by!(ccode: row['ccode'], cnumber: row['cnumber'])
+  ClassAttribute.find_or_create_by!(
+    crn: row['crn'],
+    course: course,
+    honors: row['honors'] == 'T' ? true : false,
+  )
+end
+
+all_meetings_path = Rails.root.join('lib', 'data','newData','csv', 'allClassMeetings.csv')
+
+# Seed with classtimes
+CSV.foreach(all_meetings_path, headers: true) do |row|
+  klass = ClassAttribute.find_or_create_by!(crn: row['crn'])
+  if klass.nil?
+    puts "Skipping row: CRN #{row['crn']} not found in ClassAttributes"
+    next
+  end
+  start_date = row['start_date'].present? ? Date.strptime(row['start_date'], '%m/%d/%Y') : nil
+  end_date = row['end_date'].present? ? Date.strptime(row['end_date'], '%m/%d/%Y') : nil
+
+  start_time = row['start_time'].present? && row['start_time'] != 'null' ? Time.strptime(row['start_time'], '%I:%M %p') : nil
+  end_time = row['end_time'].present? && row['end_time'] != 'null' ? Time.strptime(row['end_time'], '%I:%M %p') : nil
+  
+  day_hash = {'U'=> true, 'M'=> true, 'T'=> true, 'W'=> true, 'R'=> true, 'F'=> true, 'S'=> true}
+
+  ClassMeetingAttribute.find_or_create_by!(
+    sunday: day_hash.key?(row['sunday']) ? true : false,
+    monday: day_hash.key?(row['monday']) ? true : false,
+    tuesday: day_hash.key?(row['tuesday']) ? true : false,
+    wednesday: day_hash.key?(row['wednesday']) ? true : false,
+    thursday: day_hash.key?(row['thursday']) ? true : false,
+    friday: day_hash.key?(row['friday']) ? true : false,
+    saturday: day_hash.key?(row['saturday']) ? true : false,
+    start_time: start_time,
+    end_time: end_time,
+    start_date: start_date,
+    end_date: end_date,
+    location: row['location'],
+    meeting_type: row['meeting_type'],
+    class_attribute: klass, # Correct association reference
   )
 end
 
 # Seed with majors
 CSV.foreach(majors_csv, headers: true) do |row|
-  Major.find_or_create_by(
+  Major.find_or_create_by!(
     mname: row['mname'],
     cname: row['cname']
   )
