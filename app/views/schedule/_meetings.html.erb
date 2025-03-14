@@ -1,0 +1,10 @@
+<div class = "schedule">
+<div class="classList">
+  <h6>Meeting Times</h6> 
+  <%if @selected_class && @selected_class%>
+    <% @loaded_classes[@selected_course][@selected_class].each do |meeting| %>
+      <%= render(partial: 'meeting', locals: {meeting:meeting}) %>
+    <% end %>
+  <%end%>
+</div>
+</div>
