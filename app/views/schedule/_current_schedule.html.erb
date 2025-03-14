@@ -1,6 +1,0 @@
-<div class="current_schedule">
-    <h6>Current Schedule</h6>
-    <% @scheduled_classes.each do |course, c| %>
-      <%= render(partial: 'class', locals: {c: c,course: course,isSaved: true}) %>
-    <% end %>
-</div>

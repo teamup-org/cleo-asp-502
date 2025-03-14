@@ -3,7 +3,7 @@ class AddClassAttributes < ActiveRecord::Migration[7.2]
     create_table :class_attributes do |t|
       t.integer :crn
       t.string :class_type
-      t.boolean :is_online
+      t.string :is_online
       t.string :instructor
       t.boolean :honors
       t.references :course, null: false, foreign_key: true
