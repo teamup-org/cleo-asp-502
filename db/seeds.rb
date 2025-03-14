@@ -40,6 +40,7 @@ end
 
 #seed with all courses
 all_courses_path = Rails.root.join('lib', 'data','newData','csv', 'allCourses.csv')
+return unless File.exist?(all_courses_path) 
 CSV.foreach(all_courses_path, headers: true) do |row|
   Course.find_or_create_by(
     ccode: row['ccode'],
@@ -51,13 +52,11 @@ end
 
 #seed preresiquites
 all_prereq_path = Rails.root.join('lib', 'data','newData','csv', 'PrereqData.csv')
+return unless File.exist?(all_prereq_path)
 CSV.foreach(all_prereq_path, headers: true) do |row|
   course = Course.find_by(ccode: row['course_ccode'], cnumber: row['course_cnumber'])
   prereq = Course.find_by(ccode: row['prereq_ccode'], cnumber: row['prereq_cnumber'])
-  if course.nil? || prereq.nil?
-    next
-  end
-  Prerequisite.find_or_create_by!(
+  Prerequisite.find_or_create_by(
     course: course,
     prereq: prereq,
     equi_id: row['equi_id']
@@ -70,6 +69,7 @@ end
 all_classes_path = Rails.root.join('lib', 'data','newData','csv', 'allClassesSpring2025.csv')
 
 # Seed with classes
+return unless File.exist?(all_classes_path) 
 CSV.foreach(all_classes_path, headers: true) do |row|
   course = Course.find_or_create_by!(ccode: row['ccode'], cnumber: row['cnumber'])
   ClassAttribute.find_or_create_by!(
@@ -82,6 +82,7 @@ end
 all_meetings_path = Rails.root.join('lib', 'data','newData','csv', 'allClassMeetings.csv')
 
 # Seed with classtimes
+return unless File.exist?(all_meetings_path) 
 CSV.foreach(all_meetings_path, headers: true) do |row|
   klass = ClassAttribute.find_or_create_by!(crn: row['crn'])
   if klass.nil?
@@ -116,7 +117,7 @@ end
 
 # Seed with majors
 CSV.foreach(majors_csv, headers: true) do |row|
-  Major.find_or_create_by!(
+  Major.find_or_create_by(
     mname: row['mname'],
     cname: row['cname']
   )

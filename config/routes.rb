@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get "class_meeting_attribute/new"
-  get "class_meeting_attribute/create"
-  get "class_attribute/new"
-  get "class_attribute/create"
   # root "student_dashboards#show"
 
   devise_for :student_logins, controllers: { omniauth_callbacks: 'student_logins/omniauth_callbacks' }
