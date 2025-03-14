@@ -1,0 +1,7 @@
+<div class="classList">
+  <h6><%=course.cname%></h6> 
+    <p><%=course.description%></P> 
+    <% classes.each do |c, meetings| %>
+      <%= render(partial: 'class', locals: {c: c,course: course, isSaved: false}) %>
+    <% end %>
+</div>

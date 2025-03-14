@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_13_232343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -151,11 +151,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
     t.index ["prereq_id"], name: "index_prerequisites_on_prereq_id"
   end
 
-  create_table "schedules", force: :cascade do |t|
-    t.integer "semester"
-    t.bigint "class_attribute_id", null: false
+  create_table "schedule_classes", force: :cascade do |t|
+    t.integer "semester", null: false
     t.string "student_google_id", null: false
-    t.index ["class_attribute_id"], name: "index_schedules_on_class_attribute_id"
+    t.bigint "class_attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["class_attribute_id"], name: "index_schedule_classes_on_class_attribute_id"
+    t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_class_in_schedule", unique: true
+    t.index ["semester", "student_google_id"], name: "idx_schedule_classes_on_schedule"
+  end
+
+  create_table "schedules", id: false, force: :cascade do |t|
+    t.integer "semester"
+    t.string "student_google_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "student_courses", id: false, force: :cascade do |t|
@@ -219,7 +230,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
   add_foreign_key "degree_requirements", "majors"
   add_foreign_key "prerequisites", "courses"
   add_foreign_key "prerequisites", "courses", column: "prereq_id"
-  add_foreign_key "schedules", "class_attributes"
+  add_foreign_key "schedule_classes", "class_attributes"
   add_foreign_key "schedules", "students", column: "student_google_id", primary_key: "google_id"
   add_foreign_key "student_courses", "students", primary_key: "google_id"
 end

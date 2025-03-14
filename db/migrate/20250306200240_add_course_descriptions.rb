@@ -9,8 +9,8 @@ class AddCourseDescriptions < ActiveRecord::Migration[7.2]
 
     course_descriptions_1 = Rails.root.join('lib', 'data','newData','csv', 'DescriptionData1.csv')
     course_descriptions_2 = Rails.root.join('lib', 'data','newData','csv', 'DescriptionData2.csv')
-    update_description(course_descriptions_1)
-    update_description(course_descriptions_2)
+    #update_description(course_descriptions_1) doing this in seed
+    #update_description(course_descriptions_2)
   end
   def down
     if column_exists?(:courses, :description)
