@@ -15,7 +15,7 @@ class AddClassMeetingAttributes < ActiveRecord::Migration[7.2]
             t.string :location
             t.string :meeting_type
             t.references :class_attribute, null: false, foreign_key: true
-
+    
             t.timestamps
         end
     end
