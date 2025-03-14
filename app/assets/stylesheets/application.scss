@@ -307,7 +307,6 @@ th {
 
 }
 .classList{
-  flex-direction: row;
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -323,5 +322,18 @@ th {
   flex-direction: row;
   gap: 20px;
 }
-
+.meetings{
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.meeting{
+  display:flex;
+  flex-direction: row;
+  gap: 20px;
+}
 @import 'select2';

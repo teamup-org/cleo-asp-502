@@ -3,4 +3,7 @@
 <% @loaded_classes.each do |course, classes| %>
     <%=render(partial: 'classList',locals:{course: course, classes: classes})%>
 <%end%>
+<div>
+<%=render(partial:'meetings')%>
+</div>
 </div>
