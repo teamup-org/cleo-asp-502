@@ -23,8 +23,7 @@ class ScheduleController < ApplicationController
       shed.schedule_classes.create(class_attribute_id:params[:class_id])
     end
   end
-
-  def 
+  
 
   def set_schedule
     @scheduled_classes = {}
@@ -33,21 +32,6 @@ class ScheduleController < ApplicationController
       @scheduled_classes[c.class_attribute.course] = c.class_attribute
     end
   end
-  def check_time_conflict(m1, m2)
-    if(m1.sunday && m2.sunday || m1.monday && m2.monday || m1.tuesday && m2.tuesday || m1.wednesday && m2.wednesday || m1.thrusday && m2.thursday || m1.friday && m2.friday || m1.saturday && m2.saturday)
-      if m1.start_time < m2.end_time && m1.end_time > m2.start_time
-        return true;
-      end
-  end
-  def check_times()
-    @loaded_classes.each do |course, classes|
-      classes.each do |c, meetings|
-        meetings.each do
-          if(check_time_conflict(@select_class))
-        end
-    end
-  end
-  
 def index
   @emoji_maps = [
     {
@@ -101,7 +85,6 @@ def index
       set_schedule()
       @semester_courses = StudentCourse.where(sem: params[:semester_num]).to_a 
       @loaded_classes = {}
-      @loaded_classes_time_check = {}
       i = 0
       @semester_courses.each do |studentCourse|
         course = studentCourse.course
@@ -112,10 +95,8 @@ def index
         classes.each do |klass|
           meetings = ClassMeetingAttribute.where(class_attribute_id: klass.id).to_a
           @loaded_classes[course][klass] = meetings
-          @loaded_classes_time_check[course][klass] = false
         end
       end
     end
-    check_times()
 end
 end
