@@ -78,6 +78,18 @@
     <%= form.collection_select :grad_semester, Student.grad_semesters.keys.map { |k| [k.humanize, k] }, :second, :first, { prompt: "Select Grad Semester" }, class: 'studentinfo_select' %>
   </div>
 
+  <div class="studentinfo_field">
+    <%= form.label :academic_standing, 'Academic Standing', class: 'studentinfo_label bold' %>
+    <span class="studentinfo_field_description">Select your academic standing</span>
+    <%= form.select :academic_standing, Student.academic_standings.keys.map { |k| [k.humanize, k] }, { prompt: "Select Academic Standing" }, class: 'studentinfo_select' %>
+  </div>
+
+  <div class="studentinfo_field">
+    <%= form.label :preference_online, 'Preference for Online Classes', class: 'studentinfo_label bold' %>
+    <span class="studentinfo_field_description">Do you prefer online classes?</span>
+    <%= form.check_box :preference_online, class: 'studentinfo_checkbox' %>
+  </div>
+
   <div class="studentinfo_submit">
     <%= form.submit @student.new_record? ? 'Create Student' : 'Update Student Information', class: 'studentinfo_submit_button' %>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_13_002054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,13 +88,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
   create_table "courses", force: :cascade do |t|
     t.integer "cnumber"
     t.string "cname", limit: 255
+    t.text "description"
     t.integer "credit_hours", default: 0
     t.integer "lecture_hours", default: 0
     t.integer "lab_hours", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccode", limit: 30
-    t.text "description"
     t.index ["ccode", "cnumber"], name: "index_courses_on_ccode_and_cnumber", unique: true
   end
 
@@ -194,6 +194,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_10_135200) do
     t.boolean "is_admin", default: false, null: false
     t.bigint "track_id"
     t.bigint "emphasis_id"
+    t.string "academic_standing"
+    t.boolean "preference_online"
     t.index ["emphasis_id"], name: "index_students_on_emphasis_id"
     t.index ["major_id"], name: "index_students_on_major_id"
     t.index ["track_id"], name: "index_students_on_track_id"
