@@ -18,7 +18,9 @@ RSpec.describe 'students/profile', type: :view do
            major:,
            emphasis:,
            total_credits_completed: 95,
-           google_id: '12345')
+           google_id: '12345',
+           academic_standing: 'good', # New field
+           preference_online: true)   # New field
   end
 
   before do
@@ -66,6 +68,14 @@ RSpec.describe 'students/profile', type: :view do
 
   it "displays the student's emphasis if present" do
     expect(rendered).to have_selector('p.profile-info', text: 'Emphasis: Artificial Intelligence')
+  end
+
+  it "displays the student's academic standing" do
+    expect(rendered).to have_selector('p.profile-info', text: 'Academic Standing: Good')
+  end
+
+  it "displays the student's preference for online classes" do
+    expect(rendered).to have_selector('p.profile-info', text: 'Preference for Online Classes: Yes')
   end
 
   it 'displays the credits scale with the correct fill percentage' do

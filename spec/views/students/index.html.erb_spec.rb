@@ -17,7 +17,9 @@ RSpec.describe 'students/index', type: :view do
              grad_year: 2026,
              enrol_semester: 'Fall',
              grad_semester: 'Spring',
-             major: major1),
+             major: major1,
+             academic_standing: 'good', # New field
+             preference_online: true),  # New field
       double('Student',
              id: '987654321',
              first_name: 'Jane',
@@ -27,7 +29,9 @@ RSpec.describe 'students/index', type: :view do
              grad_year: 2027,
              enrol_semester: 'Spring',
              grad_semester: 'Fall',
-             major: major2),
+             major: major2,
+             academic_standing: 'probation', # New field
+             preference_online: false),      # New field
       double('Student',
              id: '456789123',
              first_name: 'Bob',
@@ -37,7 +41,9 @@ RSpec.describe 'students/index', type: :view do
              grad_year: 2027,
              enrol_semester: 'Fall',
              grad_semester: 'Spring',
-             major: nil)
+             major: nil,
+             academic_standing: nil, # New field
+             preference_online: nil) # New field
     ]
   end
 
@@ -71,6 +77,8 @@ RSpec.describe 'students/index', type: :view do
     expect(rendered).to have_selector('th', text: 'Enrollment Semester')
     expect(rendered).to have_selector('th', text: 'Graduation Semester')
     expect(rendered).to have_selector('th', text: 'Major')
+    expect(rendered).to have_selector('th', text: 'Academic Standing') # New header
+    expect(rendered).to have_selector('th', text: 'Preference for Online Classes') # New header
     expect(rendered).to have_selector('th', text: 'Actions')
   end
 
@@ -85,6 +93,8 @@ RSpec.describe 'students/index', type: :view do
       expect(rendered).to include('Fall')
       expect(rendered).to include('Spring')
       expect(rendered).to include('Computer Science')
+      expect(rendered).to include('Good') # New field
+      expect(rendered).to include('Yes')  # New field
     end
 
     it "displays 'N/A' for students without a major" do
@@ -92,6 +102,8 @@ RSpec.describe 'students/index', type: :view do
       expect(rendered).to include('Bob')
       expect(rendered).to include('Johnson')
       expect(rendered).to include('N/A')
+      expect(rendered).to include('N/A') # New field
+      expect(rendered).to include('N/A') # New field
     end
   end
 
