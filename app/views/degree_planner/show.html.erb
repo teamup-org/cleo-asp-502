@@ -51,7 +51,7 @@
         </div>
         <br>
 
-        <%= form_with url: degree_planner_student_path, method: :get, local: true do |f| %>
+        <%= form_with url: degree_planner_student_path(@student.google_id), method: :get, local: true do |f| %>
         <div class="filter-sort-container">
 
             <label for="ccode">Course Code:</label>
@@ -179,7 +179,7 @@
       Includes fields for track, emphasis area, and targeted graduation year.
     %>
         <h2 class="generate-form-title">Generate Based on Interests</h2>
-        <%= form_with url: student_degree_planner_path(@student), method: :post, class: "generate-form" do |f| %>
+        <%= form_with url: student_degree_planner_path(@student.google_id), method: :post, class: "generate-form" do |f| %>
 
         <!--
       <div class="generate_form-group">
