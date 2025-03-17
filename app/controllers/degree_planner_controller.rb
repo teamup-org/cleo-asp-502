@@ -12,6 +12,12 @@ class DegreePlannerController < ApplicationController
     @course_prerequisite_status = check_prerequisites(@student, @student_courses)
     @emphasis_options = Emphasis.all.pluck(:ename)
     @track_options = Track.all.pluck(:tname)
+    @courses = CourseFinder.call(search_params)
+  end
+
+  def index
+    courses = CourseFinder.call(search_params)
+    render json: courses
   end
 
   def add_course
@@ -147,6 +153,10 @@ class DegreePlannerController < ApplicationController
     return if @student
 
     redirect_to some_error_path, alert: 'Student not found.'
+  end
+
+  def search_params
+    params.permit(:search, :ccode, :cnumber, :credit_hours, :sort_by, :direction)
   end
 
   def generate_plan_based_on_interests(interests); end

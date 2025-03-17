@@ -5,7 +5,7 @@ module StudentLogins
     def google_oauth2
       student_login = StudentLogin.from_google(**from_google_params)
 
-      if student_login.present?
+      if student_login.present? # && student_login.email.include?("@tamu.edu")
         # Split admin emails from environment variable and check if email is an admin
         admin_emails = ENV['ADMIN_EMAILS'].split(',')
         student_login.update(is_admin: true) if admin_emails.include?(student_login.email)
