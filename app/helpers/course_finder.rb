@@ -6,6 +6,10 @@ class CourseFinder
     new(params).call
   end
 
+  def self.transcript_call(params)
+    new(params).transcript_call
+  end
+
   def initialize(params)
     @params = params
   end
@@ -32,8 +36,8 @@ class CourseFinder
       .sorted(params[:sort_by], params[:direction])
       .limit(ITEMS_PER_PAGE)
       .offset(offset)
-      .joins("LEFT JOIN transcript_courses ON transcript_courses.course_id = courses.id AND transcript_courses.student_id = '#{params[:student]}'")
-      .where(transcript_courses: { course_id: nil })
+      .left_joins(:transcript_courses)
+      .where('transcript_courses.student_id IS NULL OR transcript_courses.student_id != ?', params[:student])
   end
 
   private
