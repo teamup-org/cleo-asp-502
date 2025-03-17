@@ -1,8 +1,10 @@
 <div class = "schedule">
 <div class="classList">
   <h6>Meeting Times</h6> 
-    <% @loaded_classes[@selected_course][@selected_class].each do |meeting| %>
+  <%if @just_selected_class && @just_selected_class%>
+    <% @loaded_classes[@just_selected_course][@just_selected_class].each do |meeting| %>
       <%= render(partial: 'meeting', locals: {meeting:meeting}) %>
     <% end %>
+  <%end%>
 </div>
 </div>
