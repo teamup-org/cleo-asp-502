@@ -12,7 +12,9 @@ class DegreePlannerController < ApplicationController
     @course_prerequisite_status = check_prerequisites(@student, @student_courses)
     @emphasis_options = Emphasis.all.pluck(:ename)
     @track_options = Track.all.pluck(:tname)
-    @courses = CourseFinder.call(search_params)
+    finder_param = search_params
+    finder_param[:student] = @student.id
+    @courses = CourseFinder.call(finder_param)
   end
 
   def index

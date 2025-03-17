@@ -20,6 +20,8 @@ class CourseFinder
       .sorted(params[:sort_by], params[:direction])
       .limit(ITEMS_PER_PAGE)
       .offset(offset)
+      .joins("LEFT JOIN transcript_courses ON transcript_courses.course_id = courses.id AND transcript_courses.student_id = '#{params[:student]}'")
+      .where(transcript_courses: { course_id: nil })
   end
 
   private
