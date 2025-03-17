@@ -6,20 +6,21 @@ BACKUP_DIR="./backups"
 FILENAME="backup-$TIMESTAMP.sql"
 
 # Automatically determine DATABASE_URL
-if [ -z "$DATABASE_URL" ]; then
-  if [ -f .env ]; then
-    DATABASE_URL=$(grep -E '^DATABASE_URL=' .env | cut -d '=' -f2)
-  else
-    echo "❌ Error: DATABASE_URL not set and no .env file found!"
-    exit 1
-  fi
-fi
+# if [ -z "$DATABASE_URL" ]; then
+#   if [ -f .env ]; then
+#     DATABASE_URL=$(grep -E '^DATABASE_URL=' .env | cut -d '=' -f2)
+#     # echo 'URL=$DATABASE_URL'
+#   else
+#     echo "❌ Error: DATABASE_URL not set and no .env file found!"
+#     exit 1
+#   fi
+# fi
 
 # Ensure backup directory exists
 mkdir -p $BACKUP_DIR
 
 # Backup the database
-pg_dump $DATABASE_URL -F c -f "$BACKUP_DIR/$FILENAME"
+pg_dump $1 -F c -f "$BACKUP_DIR/$FILENAME"
 
 # Log
 echo "✅ Backup completed: $FILENAME"
