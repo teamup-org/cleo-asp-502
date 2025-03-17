@@ -14,7 +14,7 @@ class DegreePlannerController < ApplicationController
     @track_options = Track.all.pluck(:tname)
     finder_param = search_params
     finder_param[:student] = @student.id
-    @courses = CourseFinder.call(finder_param)
+    @courses = CourseFinder.transcript_call(finder_param)
   end
 
   def index
