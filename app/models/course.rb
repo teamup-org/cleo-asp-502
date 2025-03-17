@@ -18,6 +18,10 @@ class Course < ApplicationRecord
   has_and_belongs_to_many :students, through: :student_courses
   has_many :student_courses
 
+  # Transcript courses associations
+  has_and_belongs_to_many :students, through: :transcript_courses
+  has_many :transcript_courses
+
   # Degree requirements associations
   has_and_belongs_to_many :majors
 

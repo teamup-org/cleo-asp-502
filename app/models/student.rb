@@ -28,13 +28,18 @@ class Student < ApplicationRecord
   has_many :student_courses, dependent: :destroy
   has_many :courses, through: :student_courses
 
+
+  # Transcript courses association
+  has_many :transcript_courses, dependent: :destroy
+  has_many :courses, through: :transcript_courses
+
   belongs_to :major
 
   belongs_to :track, optional: true
 
   belongs_to :emphasis, optional: true
   # belongs_to :emphasis, foreign_key: :emphases_id, optional: true
-  has_many :schedules
+  has_many :schedules, foreign_key: :student_google_id
   def total_credits_completed
     courses.sum(:credit_hours)
   end

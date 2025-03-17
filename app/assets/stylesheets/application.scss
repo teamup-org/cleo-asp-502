@@ -285,5 +285,58 @@ th {
 .navbar-purple .sign-out {
   margin-left: auto;
 }
+.class{
+  font-weight: bold;
+  border: 3px;
+  background-color: #f2f2f2;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  flex-direction: column;
+  padding: 3px;
+}
+.selected{
+  background-color: #83ffc3;
+}
+.class:hover{
+  background: deepskyblue;
+}
+.class p
+{
+    margin-top: 0; /* Or a smaller value */
+    margin-bottom: 0; /* Or a smaller value */
+    line-height: 1.2; /* Or a value of your choice */
 
+}
+.classList{
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+
+
+}
+.schedule{
+  display:flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.meetings{
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.meeting{
+  display:flex;
+  flex-direction: row;
+  gap: 20px;
+}
 @import 'select2';
