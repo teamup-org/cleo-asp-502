@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # root "student_dashboards#show"
+
   resources :transcript_courses
   # schedule
   get '/schedule', to: 'schedule#index', as: 'schedule'

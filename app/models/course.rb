@@ -39,6 +39,21 @@ class Course < ApplicationRecord
 
   has_many :degree_requirements
 
+  scope :apply_filters, lambda { |params|
+    query = all
+    query = query.where(ccode: params[:ccode]) if params[:ccode].present?
+    query = query.where(cnumber: params[:cnumber]) if params[:cnumber].present?
+    query = query.where(credit_hours: params[:credit_hours]) if params[:credit_hours].present?
+    query
+  }
+
+  scope :sorted, lambda { |sort_by, direction|
+    sort_by = 'ccode' unless %w[ccode cnumber credit_hours].include?(sort_by)
+    direction = %w[asc desc].include?(direction&.downcase) ? direction.downcase : 'asc'
+
+    order("#{sort_by} #{direction}")
+  }
+
   def prerequisite_groups
     prerequisites.includes(:prereq).group_by(&:equi_id).transform_values { |prereqs| prereqs.map(&:prereq) }
   end
