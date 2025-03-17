@@ -1,44 +1,882 @@
 major,course_code,course_number,rec_sem,year
-Computer Science,ENGR,102,1,2019
-Computer Science,MATH,151,1,2019
-Computer Science,CHEM,107,1,2019
-Computer Science,ENGL,104,1,2019
-Computer Science,UCC Elective,1,1,2019
-Computer Science,ENGR,216,2,2019
-Computer Science,PHYS,206,2,2019
-Computer Science,MATH,152,2,2019
-Computer Science,ENGL,210,2,2019
-Computer Science,UCC Elective,2,2,2019
-Computer Science,CSCE,121,3,2019
-Computer Science,CSCE,222,3,2019
-Computer Science,CSCE,181,3,2019
-Computer Science,MATH,304,3,2019
-Computer Science,Science Elective,1,3,2019
-Computer Science,General Elective,1,3,2019
-Computer Science,CSCE,221,4,2019
-Computer Science,CSCE,312,4,2019
-Computer Science,CSCE,314,4,2019
-Computer Science,Emphasis Area Elective,1,4,2019
-Computer Science,UCC Elective,3,4,2019
-Computer Science,CSCE,313,5,2019
-Computer Science,CSCE,315,5,2019
-Computer Science,CSCE,481,5,2019
-Computer Science,STAT,211,5,2019
-Computer Science,Emphasis Area Elective,2,5,2019
-Computer Science,UCC Elective,4,5,2019
-Computer Science,CSCE,411,6,2019
-Computer Science,Computer Science Elective,1,6,2019
-Computer Science,Computer Science Elective,2,6,2019
-Computer Science,MATH,251,6,2019
-Computer Science,Science Elective,2,6,2019
-Computer Science,CSCE,399,6,2019
-Computer Science,Computer Science Elective,3,7,2019
-Computer Science,Computer Science Elective,4,7,2019
-Computer Science,Computer Science Elective,5,7,2019
-Computer Science,UCC Elective,5,7,2019
-Computer Science,Emphasis Area Elective,3,7,2019
-Computer Science,CSCE,482,8,2019
-Computer Science,Computer Science Elective,6,8,2019
-Computer Science,UCC Elective,6,8,2019
-Computer Science,UCC Elective,7,8,2019
-Computer Science,Emphasis Area Elective,4,8,2019
+Computer Science,ENGR,102,1,2025
+Computer Science,MATH,151,1,2025
+Computer Science,CHEM,107,1,2025
+Computer Science,CHEM,117,1,2025
+Computer Science,ENGL,104,1,2025
+Computer Science,UCC Elective,1,1,2025
+Computer Science,ENGR,216,2,2025
+Computer Science,PHYS,206,2,2025
+Computer Science,MATH,152,2,2025
+Computer Science,CHEM,120,2,2025
+Computer Science,UCC Elective,2,2,2025
+Computer Science,CSCE,120,3,2025
+Computer Science,CSCE,222,3,2025
+Computer Science,CSCE,181,3,2025
+Computer Science,MATH,304,3,2025
+Computer Science,Science Elective,1,3,2025
+Computer Science,General Elective,1,3,2025
+Computer Science,CSCE,221,4,2025
+Computer Science,CSCE,312,4,2025
+Computer Science,CSCE,314,4,2025
+Computer Science,Emphasis Area Elective,1,4,2025
+Computer Science,ENGL,210,4,2025
+Computer Science,CSCE,313,5,2025
+Computer Science,CSCE,331,5,2025
+Computer Science,STAT,211,5,2025
+Computer Science,Emphasis Area Elective,2,5,2025
+Computer Science,UCC Elective,4,5,2025
+Computer Science,CSCE,411,6,2025
+Computer Science,CSCE,481,6,2025
+Computer Science,MATH,251,6,2025
+Computer Science,Computer Science Elective,1,6,2025
+Computer Science,Computer Science Elective,2,6,2025
+Computer Science,Science Elective,2,6,2025
+Computer Science,CSCE,399,6,2025
+Computer Science,Computer Science Elective,3,7,2025
+Computer Science,Computer Science Elective,4,7,2025
+Computer Science,Computer Science Elective,5,7,2025
+Computer Science,UCC Elective,5,7,2025
+Computer Science,Emphasis Area Elective,3,7,2025
+Computer Science,CSCE,482,8,2025
+Computer Science,Computer Science Elective,6,8,2025
+Computer Science,UCC Elective,6,8,2025
+Computer Science,UCC Elective,7,8,2025
+Computer Science,Emphasis Area Elective,4,8,2025
+Computer Engineering,ENGR,102,1,2025
+Computer Engineering,MATH,151,1,2025
+Computer Engineering,CHEM,107,1,2025
+Computer Engineering,CHEM,117,1,2025
+Computer Engineering,ENGL,104,1,2025
+Computer Engineering,UCC Elective,1,1,2025
+Computer Engineering,ENGR,216,2,2025
+Computer Engineering,PHYS,206,2,2025
+Computer Engineering,MATH,152,2,2025
+Computer Engineering,CHEM,120,2,2025
+Computer Engineering,UCC Elective,2,2,2025
+Computer Engineering,CSCE,120,3,2025
+Computer Engineering,ECEN,248,3,2025
+Computer Engineering,MATH,251,3,2025
+Computer Engineering,PHYS,207,3,2025
+Computer Engineering,PHYS,217,3,2025
+Computer Engineering,CSCE,221,4,2025
+Computer Engineering,CSCE,222,4,2025
+Computer Engineering,ECEN,214,4,2025
+Computer Engineering,ECEN,303,4,2025
+Computer Engineering,MATH,308,4,2025
+Computer Engineering,CSCE,313,5,2025
+Computer Engineering,CSCE,350,5,2025
+Computer Engineering,CSCE,481,5,2025
+Computer Engineering,ECEN,314,5,2025
+Computer Engineering,MATH,311,5,2025
+Computer Engineering,ENGL,210,5,2025
+Computer Engineering,CSCE,331,6,2025
+Computer Engineering,CSCE,462,6,2025
+Computer Engineering,ECEN,325,6,2025
+Computer Engineering,ECEN,454,6,2025
+Computer Engineering,UCC Elective,3,6,2025
+Computer Engineering,Senior Design,1,7,2025
+Computer Engineering,UCC Elective,4,7,2025
+Computer Engineering,Area Elective,1,7,2025
+Computer Engineering,Engineering Elective,1,7,2025
+Computer Engineering,CSCE,399,7,2025
+Computer Engineering,Senior Design,2,8,2025
+Computer Engineering,UCC Elective,5,8,2025
+Computer Engineering,Area Elective,2,8,2025
+Computing,CSCE,181,1,2025
+Computing,ENGL,104,1,2025
+Computing,CSCE,110,1,2025
+Computing,MATH,151,1,2025
+Computing,UCC Elective,1,1,2025
+Computing,CSCE,120,2,2025
+Computing,MATH,152,2,2025
+Computing,UCC Elective,2,2,2025
+Computing,UCC Elective,3,2,2025
+Computing,Concentration Elective,1,2,2025
+Computing,CSCE,221,3,2025
+Computing,CSCE,222,3,2025
+Computing,STAT,211,3,2025
+Computing,UCC Elective,4,3,2025
+Computing,Concentration Elective,2,3,2025
+Computing,CSCE,312,4,2025
+Computing,CSCE,314,4,2025
+Computing,ENGL,210,4,2025
+Computing,UCC Elective,5,4,2025
+Computing,Concentration Elective,3,4,2025
+Computing,CSCE,313,5,2025
+Computing,CSCE,331,5,2025
+Computing,CSCE,481,5,2025
+Computing,UCC Elective,6,5,2025
+Computing,Concentration Elective,4,5,2025
+Computing,CSCE,411,6,2025
+Computing,UCC Elective,7,6,2025
+Computing,Concentration Elective,5,6,2025
+Computing,Concentration Elective,6,6,2025
+Computing,Prescribed Elective,1,6,2025
+Computing,UCC Elective,8,7,2025
+Computing,UCC Elective,9,7,2025
+Computing,Concentration Elective,7,7,2025
+Computing,Concentration Elective,8,7,2025
+Computing,Prescribed Elective,2,7,2025
+Computing,CSCE,482,8,2025
+Computing,UCC Elective,10,8,2025
+Computing,Concentration Elective,9,8,2025
+Computing,Concentration Elective,10,8,2025
+Computing,Prescribed Elective,3,8,2025
+Biological and Agricultural Engineering,CHEM,107,1,2025
+Biological and Agricultural Engineering,CHEM,117,1,2025
+Biological and Agricultural Engineering,ENGL,104,1,2025
+Biological and Agricultural Engineering,ENGR,102,1,2025
+Biological and Agricultural Engineering,MATH,151,1,2025
+Biological and Agricultural Engineering,American History,1,1,2025
+Biological and Agricultural Engineering,ENGL,210,2,2025
+Biological and Agricultural Engineering,ENGR,216,2,2025
+Biological and Agricultural Engineering,MATH,152,2,2025
+Biological and Agricultural Engineering,PHYS,206,2,2025
+Biological and Agricultural Engineering,POLS,206,2,2025
+Biological and Agricultural Engineering,BAEN,201,3,2025
+Biological and Agricultural Engineering,BIOL,111,3,2025
+Biological and Agricultural Engineering,ENGR,217,3,2025
+Biological and Agricultural Engineering,MATH,251,3,2025
+Biological and Agricultural Engineering,MEEN,221,3,2025
+Biological and Agricultural Engineering,PHYS,207,3,2025
+Biological and Agricultural Engineering,BAEN,301,4,2025
+Biological and Agricultural Engineering,BAEN,320,4,2025
+Biological and Agricultural Engineering,CHEM,222,4,2025
+Biological and Agricultural Engineering,CVEN,305,4,2025
+Biological and Agricultural Engineering,MATH,308,4,2025
+Biological and Agricultural Engineering,MEEN,222,4,2025
+Biological and Agricultural Engineering,BAEN,302,5,2025
+Biological and Agricultural Engineering,BAEN,340,5,2025
+Biological and Agricultural Engineering,BAEN,354,5,2025
+Biological and Agricultural Engineering,BAEN,375,5,2025
+Biological and Agricultural Engineering,ECEN,215,5,2025
+Biological and Agricultural Engineering,BAEN,365,6,2025
+Biological and Agricultural Engineering,BAEN,366,6,2025
+Biological and Agricultural Engineering,BAEN,370,6,2025
+Biological and Agricultural Engineering,POLS,207,6,2025
+Biological and Agricultural Engineering,Mathematics Elective,1,6,2025
+Biological and Agricultural Engineering,BAEN,399,7,2025
+Biological and Agricultural Engineering,BAEN,479,7,2025
+Biological and Agricultural Engineering,Language, Philosophy and Culture,1,7,2025
+Biological and Agricultural Engineering,Social and Behavioral Sciences,1,7,2025
+Biological and Agricultural Engineering,BAEN Elective,1,7,2025
+Biological and Agricultural Engineering,ENGR Elective,1,7,2025
+Biological and Agricultural Engineering,BAEN,480,8,2025
+Biological and Agricultural Engineering,American History,2,8,2025
+Biological and Agricultural Engineering,Creative Arts,1,8,2025
+Biological and Agricultural Engineering,BAEN Elective,2,8,2025
+Biological and Agricultural Engineering,Technical Elective,1,8,2025
+Aerospace Engineering,CHEM,107,1,2025
+Aerospace Engineering,CHEM,117,1,2025
+Aerospace Engineering,ENGL,104,1,2025
+Aerospace Engineering,ENGR,102,1,2025
+Aerospace Engineering,MATH,151,1,2025
+Aerospace Engineering,UCC Elective,1,1,2025
+Aerospace Engineering,ENGR,216,2,2025
+Aerospace Engineering,MATH,152,2,2025
+Aerospace Engineering,PHYS,206,2,2025
+Aerospace Engineering,UCC Elective,2,2,2025
+Aerospace Engineering,CHEM,120,2,2025
+Aerospace Engineering,AERO,201,3,2025
+Aerospace Engineering,AERO,211,3,2025
+Aerospace Engineering,AERO,212,3,2025
+Aerospace Engineering,AERO,221,3,2025
+Aerospace Engineering,MATH,251,3,2025
+Aerospace Engineering,AERO,214,4,2025
+Aerospace Engineering,AERO,222,4,2025
+Aerospace Engineering,AERO,301,4,2025
+Aerospace Engineering,MATH,308,4,2025
+Aerospace Engineering,PHYS,207,4,2025
+Aerospace Engineering,PHYS,217,4,2025
+Aerospace Engineering,AERO,303,5,2025
+Aerospace Engineering,AERO,304,5,2025
+Aerospace Engineering,AERO,310,5,2025
+Aerospace Engineering,ECEN,215,5,2025
+Aerospace Engineering,ENGL,210,5,2025
+Aerospace Engineering,UCC Elective,3,5,2025
+Aerospace Engineering,AERO,306,6,2025
+Aerospace Engineering,AERO,307,6,2025
+Aerospace Engineering,AERO,321,6,2025
+Aerospace Engineering,AERO,351,6,2025
+Aerospace Engineering,UCC Elective,4,6,2025
+Aerospace Engineering,AERO,401,7,2025
+Aerospace Engineering,AERO,413,7,2025
+Aerospace Engineering,AERO,423,7,2025
+Aerospace Engineering,AERO Elective,1,7,2025
+Aerospace Engineering,UCC Elective,5,7,2025
+Aerospace Engineering,AERO,402,8,2025
+Aerospace Engineering,AERO,422,8,2025
+Aerospace Engineering,AERO,452,8,2025
+Aerospace Engineering,AERO Elective,2,8,2025
+Aerospace Engineering,AERO Elective,3,8,2025
+Aerospace Engineering,UCC Elective,6,8,2025
+Biomedical Engineering,CHEM,107,1,2025
+Biomedical Engineering,CHEM,117,1,2025
+Biomedical Engineering,ENGL,104,1,2025
+Biomedical Engineering,ENGR,102,1,2025
+Biomedical Engineering,MATH,151,1,2025
+Biomedical Engineering,UCC Elective,1,1,2025
+Biomedical Engineering,ENGR,216,2,2025
+Biomedical Engineering,MATH,152,2,2025
+Biomedical Engineering,PHYS,206,2,2025
+Biomedical Engineering,UCC Elective,2,2,2025
+Biomedical Engineering,CHEM,120,2,2025
+Biomedical Engineering,BMEN,201,3,2025
+Biomedical Engineering,BMEN,253,3,2025
+Biomedical Engineering,ENGR,217,3,2025
+Biomedical Engineering,MATH,251,3,2025
+Biomedical Engineering,PHYS,207,3,2025
+Biomedical Engineering,VTPP,434,3,2025
+Biomedical Engineering,BMEN,207,4,2025
+Biomedical Engineering,BMEN,250,4,2025
+Biomedical Engineering,BMEN,254,4,2025
+Biomedical Engineering,MATH,308,4,2025
+Biomedical Engineering,VTPP,435,4,2025
+Biomedical Engineering,ENGL,210,4,2025
+Biomedical Engineering,BMEN,321,5,2025
+Biomedical Engineering,BMEN,351,5,2025
+Biomedical Engineering,BMEN,353,5,2025
+Biomedical Engineering,BMEN,361,5,2025
+Biomedical Engineering,CHEM,227,5,2025
+Biomedical Engineering,UCC Elective,3,5,2025
+Biomedical Engineering,BMEN,311,6,2025
+Biomedical Engineering,BMEN,341,6,2025
+Biomedical Engineering,BMEN,343,6,2025
+Biomedical Engineering,BMEN,344,6,2025
+Biomedical Engineering,BMEN,354,6,2025
+Biomedical Engineering,UCC Elective,4,6,2025
+Biomedical Engineering,BMEN,453,7,2025
+Biomedical Engineering,UCC Elective,5,7,2025
+Biomedical Engineering,Technical Elective,1,7,2025
+Biomedical Engineering,Technical Elective,2,7,2025
+Biomedical Engineering,Technical Elective,3,7,2025
+Biomedical Engineering,BMEN,454,8,2025
+Biomedical Engineering,UCC Elective,6,8,2025
+Biomedical Engineering,Technical Elective,4,8,2025
+Biomedical Engineering,Technical Elective,5,8,2025
+Chemical Engineering,CHEM,107,1,2025
+Chemical Engineering,CHEM,117,1,2025
+Chemical Engineering,ENGL,104,1,2025
+Chemical Engineering,ENGR,102,1,2025
+Chemical Engineering,MATH,151,1,2025
+Chemical Engineering,UCC Elective,1,1,2025
+Chemical Engineering,ENGR,216,2,2025
+Chemical Engineering,MATH,152,2,2025
+Chemical Engineering,PHYS,206,2,2025
+Chemical Engineering,UCC Elective,2,2,2025
+Chemical Engineering,CHEM,120,2,2025
+Chemical Engineering,CHEN,201,3,2025
+Chemical Engineering,CHEN,204,3,2025
+Chemical Engineering,ENGR,217,3,2025
+Chemical Engineering,MATH,251,3,2025
+Chemical Engineering,PHYS,207,3,2025
+Chemical Engineering,CHEM,227,3,2025
+Chemical Engineering,CHEM,237,3,2025
+Chemical Engineering,CHEN,205,4,2025
+Chemical Engineering,ENGL,210,4,2025
+Chemical Engineering,MATH,308,4,2025
+Chemical Engineering,CHEM,228,4,2025
+Chemical Engineering,CHEM,238,4,2025
+Chemical Engineering,UCC Elective,3,4,2025
+Chemical Engineering,CHEN,304,5,2025
+Chemical Engineering,CHEN,320,5,2025
+Chemical Engineering,CHEN,322,5,2025
+Chemical Engineering,CHEN,354,5,2025
+Chemical Engineering,CHEN,481,5,2025
+Chemical Engineering,UCC Elective,4,5,2025
+Chemical Engineering,CHEM,322,6,2025
+Chemical Engineering,CHEN,323,6,2025
+Chemical Engineering,CHEN,324,6,2025
+Chemical Engineering,CHEN,364,6,2025
+Chemical Engineering,CHEN,374,6,2025
+Chemical Engineering,UCC Elective,5,6,2025
+Chemical Engineering,CHEN,425,7,2025
+Chemical Engineering,CHEN,432,7,2025
+Chemical Engineering,CHEN,461,7,2025
+Chemical Engineering,CHEN,482,7,2025
+Chemical Engineering,UCC Elective,6,7,2025
+Chemical Engineering,CHEN Specialty Options,1,7,2025
+Chemical Engineering,CHEN,426,8,2025
+Chemical Engineering,CHEN,433,8,2025
+Chemical Engineering,CHEN,455,8,2025
+Chemical Engineering,UCC Elective,7,8,2025
+Chemical Engineering,CHEN Specialty Options,2,8,2025
+Electrical Engineering,CHEM,107,1,2025
+Electrical Engineering,CHEM,117,1,2025
+Electrical Engineering,ENGL,104,1,2025
+Electrical Engineering,ENGR,102,1,2025
+Electrical Engineering,MATH,151,1,2025
+Electrical Engineering,UCC Elective,1,1,2025
+Electrical Engineering,ENGR,216,2,2025
+Electrical Engineering,MATH,152,2,2025
+Electrical Engineering,PHYS,206,2,2025
+Electrical Engineering,UCC Elective,2,2,2025
+Electrical Engineering,CHEM,120,2,2025
+Electrical Engineering,CSCE,120,3,2025
+Electrical Engineering,ECEN,248,3,2025
+Electrical Engineering,MATH,251,3,2025
+Electrical Engineering,PHYS,207,3,2025
+Electrical Engineering,PHYS,217,3,2025
+Electrical Engineering,ECEN,214,4,2025
+Electrical Engineering,ECEN,250,4,2025
+Electrical Engineering,MATH,308,4,2025
+Electrical Engineering,MATH,311,4,2025
+Electrical Engineering,PHYS,222,4,2025
+Electrical Engineering,ECEN,314,5,2025
+Electrical Engineering,ECEN,322,5,2025
+Electrical Engineering,ECEN,325,5,2025
+Electrical Engineering,ECEN,340,5,2025
+Electrical Engineering,ENGL,210,5,2025
+Electrical Engineering,ECEN,303,6,2025
+Electrical Engineering,ECEN,350,6,2025
+Electrical Engineering,ECEN,370,6,2025
+Electrical Engineering,UCC Elective,3,6,2025
+Electrical Engineering,Technical Elective,1,6,2025
+Electrical Engineering,ECEN,403,7,2025
+Electrical Engineering,UCC Elective,4,7,2025
+Electrical Engineering,ECEN Elective,1,7,2025
+Electrical Engineering,ECEN Elective,2,7,2025
+Electrical Engineering,ECEN Elective,3,7,2025
+Electrical Engineering,ECEN,399,7,2025
+Electrical Engineering,ECEN,404,8,2025
+Electrical Engineering,UCC Elective,5,8,2025
+Electrical Engineering,ECEN Elective,4,8,2025
+Electrical Engineering,ECEN Elective,5,8,2025
+Environmental Engineering,CHEM,107,1,2025
+Environmental Engineering,CHEM,117,1,2025
+Environmental Engineering,ENGL,104,1,2025
+Environmental Engineering,ENGR,102,1,2025
+Environmental Engineering,MATH,151,1,2025
+Environmental Engineering,UCC Elective,1,1,2025
+Environmental Engineering,ENGR,216,2,2025
+Environmental Engineering,MATH,152,2,2025
+Environmental Engineering,PHYS,206,2,2025
+Environmental Engineering,UCC Elective,2,2,2025
+Environmental Engineering,CHEM,120,2,2025
+Environmental Engineering,BIOL,113,3,2025
+Environmental Engineering,CVEN,221,3,2025
+Environmental Engineering,ENGR,217,3,2025
+Environmental Engineering,EVEN,201,3,2025
+Environmental Engineering,MATH,251,3,2025
+Environmental Engineering,STAT,211,3,2025
+Environmental Engineering,PHYS,207,3,2025
+Environmental Engineering,CVEN,302,4,2025
+Environmental Engineering,EVEN,301,4,2025
+Environmental Engineering,EVEN,304,4,2025
+Environmental Engineering,EVEN,311,4,2025
+Environmental Engineering,MATH,308,4,2025
+Environmental Engineering,Earth Science Elective,4,2025
+Environmental Engineering,BAEN,320,5,2025
+Environmental Engineering,CVEN,322,5,2025
+Environmental Engineering,EVEN,320,5,2025
+Environmental Engineering,EVEN,339,5,2025
+Environmental Engineering,UCC Elective,3,5,2025
+Environmental Engineering,EVEN,402,6,2025
+Environmental Engineering,EVEN,404,6,2025
+Environmental Engineering,EVEN,406,6,2025
+Environmental Engineering,EVEN,413,6,2025
+Environmental Engineering,Engineering Science Elective,6,2025
+Environmental Engineering,COMM,205,6,2025
+Environmental Engineering,BAEN,477,7,2025
+Environmental Engineering,CVEN,423,7,2025
+Environmental Engineering,EVEN,400,7,2025
+Environmental Engineering,Environmental Engineering Elective,7,2025
+Environmental Engineering,UCC Elective,4,7,2025
+Environmental Engineering,EVEN,401,8,2025
+Environmental Engineering,PHIL,482,8,2025
+Environmental Engineering,Environmental Engineering Elective,8,2025
+Environmental Engineering,UCC Elective,5,8,2025
+Environmental Engineering,Technical Elective,8,2025
+Electronic Systems Engineering Technology,CHEM,107,1,2025
+Electronic Systems Engineering Technology,CHEM,117,1,2025
+Electronic Systems Engineering Technology,ENGL,104,1,2025
+Electronic Systems Engineering Technology,ENGR,102,1,2025
+Electronic Systems Engineering Technology,MATH,151,1,2025
+Electronic Systems Engineering Technology,UCC Elective,1,1,2025
+Electronic Systems Engineering Technology,ENGR,216,2,2025
+Electronic Systems Engineering Technology,MATH,152,2,2025
+Electronic Systems Engineering Technology,PHYS,206,2,2025
+Electronic Systems Engineering Technology,UCC Elective,2,2,2025
+Electronic Systems Engineering Technology,CHEM,120,2,2025
+Electronic Systems Engineering Technology,ENGR,217,3,2025
+Electronic Systems Engineering Technology,ESET,210,3,2025
+Electronic Systems Engineering Technology,ESET,219,3,2025
+Electronic Systems Engineering Technology,ESET,269,3,2025
+Electronic Systems Engineering Technology,PHYS,207,3,2025
+Electronic Systems Engineering Technology,ESET,211,4,2025
+Electronic Systems Engineering Technology,ESET,315,4,2025
+Electronic Systems Engineering Technology,ESET,329,4,2025
+Electronic Systems Engineering Technology,ESET,349,4,2025
+Electronic Systems Engineering Technology,Mathematics Elective,4,2025
+Electronic Systems Engineering Technology,ESET,319,5,2025
+Electronic Systems Engineering Technology,ESET,333,5,2025
+Electronic Systems Engineering Technology,ESET,350,5,2025
+Electronic Systems Engineering Technology,ESET,355,5,2025
+Electronic Systems Engineering Technology,ESET,369,5,2025
+Electronic Systems Engineering Technology,ESET,352,6,2025
+Electronic Systems Engineering Technology,ESET,359,6,2025
+Electronic Systems Engineering Technology,ESET,415,6,2025
+Electronic Systems Engineering Technology,ESET,455,6,2025
+Electronic Systems Engineering Technology,UCC Elective,3,6,2025
+Electronic Systems Engineering Technology,ESET,419,7,2025
+Electronic Systems Engineering Technology,ESET,462,7,2025
+Electronic Systems Engineering Technology,Technical Elective,7,2025
+Electronic Systems Engineering Technology,ENGL,210,7,2025
+Electronic Systems Engineering Technology,ESET,420,8,2025
+Electronic Systems Engineering Technology,Technical Elective,8,2025
+Electronic Systems Engineering Technology,UCC Elective,4,8,2025
+Electronic Systems Engineering Technology,UCC Elective,5,8,2025
+Electronic Systems Engineering Technology,UCC Elective,6,8,2025
+Industrial Distribution,CHEM,107,1,2025
+Industrial Distribution,CHEM,117,1,2025
+Industrial Distribution,ENGL,104,1,2025
+Industrial Distribution,ENGR,102,1,2025
+Industrial Distribution,MATH,151,1,2025
+Industrial Distribution,UCC Elective,1,1,2025
+Industrial Distribution,PHYS,216,2,2025
+Industrial Distribution,MATH,152,2,2025
+Industrial Distribution,PHYS,206,2,2025
+Industrial Distribution,UCC Elective,2,2,2025
+Industrial Distribution,CHEM,120,2,2025
+Industrial Distribution,ENGR,217,3,2025
+Industrial Distribution,IDIS,240,3,2025
+Industrial Distribution,ISTM,209,3,2025
+Industrial Distribution,PHYS,207,3,2025
+Industrial Distribution,STAT,201,3,2025
+Industrial Distribution,ACCT,209,4,2025
+Industrial Distribution,ECON,202,4,2025
+Industrial Distribution,MGMT,209,4,2025
+Industrial Distribution,MMET,201,4,2025
+Industrial Distribution,UCC Elective,3,4,2025
+Industrial Distribution,ENGL,210,5,2025
+Industrial Distribution,IDIS,330,5,2025
+Industrial Distribution,IDIS,340,5,2025
+Industrial Distribution,IDIS,343,5,2025
+Industrial Distribution,UCC Elective,4,5,2025
+Industrial Distribution,ENTC,399,6,2025
+Industrial Distribution,ESET,300,6,2025
+Industrial Distribution,IDIS,344,6,2025
+Industrial Distribution,IDIS,364,6,2025
+Industrial Distribution,MMET,301,6,2025
+Industrial Distribution,Technical Elective,1,6,2025
+Industrial Distribution,ESET,400,7,2025
+Industrial Distribution,IDIS,424,7,2025
+Industrial Distribution,IDIS,433,7,2025
+Industrial Distribution,IDIS,443,7,2025
+Industrial Distribution,MMET,401,7,2025
+Industrial Distribution,IDIS,434,8,2025
+Industrial Distribution,IDIS,444,8,2025
+Industrial Distribution,IDIS,450,8,2025
+Industrial Distribution,UCC Elective,5,8,2025
+Industrial Distribution,Directed Elective,1,8,2025
+Data Engineering,CHEM,107,1,2025
+Data Engineering,CHEM,117,1,2025
+Data Engineering,ENGL,104,1,2025
+Data Engineering,ENGR,102,1,2025
+Data Engineering,MATH,151,1,2025
+Data Engineering,UCC Elective,1,1,2025
+Data Engineering,PHYS,216,2,2025
+Data Engineering,MATH,152,2,2025
+Data Engineering,PHYS,206,2,2025
+Data Engineering,UCC Elective,2,2,2025
+Data Engineering,CHEM,120,2,2025
+Data Engineering,CSCE,120,3,2025
+Data Engineering,CSCE,222,3,2025
+Data Engineering,PHYS,217,3,2025
+Data Engineering,MATH,251,3,2025
+Data Engineering,PHYS,207,3,2025
+Data Engineering,STAT,211,3,2025
+Data Engineering,CSCE,221,4,2025
+Data Engineering,DAEN,210,4,2025
+Data Engineering,ECON,202,4,2025
+Data Engineering,MATH,304,4,2025
+Data Engineering,CSCE,305,4,2025
+Data Engineering,CSCE,310,5,2025
+Data Engineering,DAEN,300,5,2025
+Data Engineering,DAEN,321,5,2025
+Data Engineering,DAEN,331,5,2025
+Data Engineering,ISEN,302,5,2025
+Data Engineering,MATH,308,5,2025
+Data Engineering,DAEN,301,6,2025
+Data Engineering,DAEN,323,6,2025
+Data Engineering,DAEN,328,6,2025
+Data Engineering,CSCE,320,6,2025
+Data Engineering,COMM,203,6,2025
+Data Engineering,UCC Elective,3,6,2025
+Data Engineering,DAEN,400,7,2025
+Data Engineering,DAEN,429,7,2025
+Data Engineering,DAEN,459,7,2025
+Data Engineering,DAEN,427,7,2025
+Data Engineering,UCC Elective,4,7,2025
+Data Engineering,DAEN,399,7,2025
+Data Engineering,DAEN,460,8,2025
+Data Engineering,UCC Elective,5,8,2025
+Data Engineering,DAEN Technical Elective,1,8,2025
+Data Engineering,DAEN Technical Elective,2,8,2025
+Data Engineering,Technical Elective,1,8,2025
+Materials Science and Engineering,CHEM,107,1,2025
+Materials Science and Engineering,CHEM,117,1,2025
+Materials Science and Engineering,ENGL,104,1,2025
+Materials Science and Engineering,ENGR,102,1,2025
+Materials Science and Engineering,MATH,151,1,2025
+Materials Science and Engineering,UCC Elective,1,1,2025
+Materials Science and Engineering,PHYS,216,2,2025
+Materials Science and Engineering,MATH,152,2,2025
+Materials Science and Engineering,PHYS,206,2,2025
+Materials Science and Engineering,UCC Elective,2,2,2025
+Materials Science and Engineering,CHEM,120,2,2025
+Materials Science and Engineering,PHYS,217,3,2025
+Materials Science and Engineering,MATH,251,3,2025
+Materials Science and Engineering,MSEN,201,3,2025
+Materials Science and Engineering,MSEN,205,3,2025
+Materials Science and Engineering,PHYS,207,3,2025
+Materials Science and Engineering,UCC Elective,3,3,2025
+Materials Science and Engineering,COMM,205,4,2025
+Materials Science and Engineering,MSEN,210,4,2025
+Materials Science and Engineering,MSEN,250,4,2025
+Materials Science and Engineering,MSEN,260,4,2025
+Materials Science and Engineering,MSEN,281,4,2025
+Materials Science and Engineering,MSEN,301,4,2025
+Materials Science and Engineering,MSEN,380,4,2025
+Materials Science and Engineering,MATH,307,5,2025
+Materials Science and Engineering,MSEN,302,5,2025
+Materials Science and Engineering,MSEN,305,5,2025
+Materials Science and Engineering,MSEN,320,5,2025
+Materials Science and Engineering,UCC Elective,4,5,2025
+Materials Science and Engineering,MSEN,399,5,2025
+Materials Science and Engineering,MSEN,325,6,2025
+Materials Science and Engineering,MSEN,330,6,2025
+Materials Science and Engineering,MSEN,360,6,2025
+Materials Science and Engineering,MSEN,400,6,2025
+Materials Science and Engineering,UCC Elective,5,6,2025
+Materials Science and Engineering,Technical Elective,1,6,2025
+Materials Science and Engineering,MSEN,401,7,2025
+Materials Science and Engineering,MSEN,410,7,2025
+Materials Science and Engineering,UCC Elective,6,7,2025
+Materials Science and Engineering,Specialty Elective,1,7,2025
+Materials Science and Engineering,Technical Elective,2,7,2025
+Materials Science and Engineering,MSEN,402,8,2025
+Materials Science and Engineering,UCC Elective,7,8,2025
+Materials Science and Engineering,Specialty Elective,2,8,2025
+Materials Science and Engineering,Specialty Elective,3,8,2025
+Materials Science and Engineering,Technical Elective,3,8,2025
+Mechanical Engineering,CHEM,107,1,2025
+Mechanical Engineering,CHEM,117,1,2025
+Mechanical Engineering,ENGL,104,1,2025
+Mechanical Engineering,ENGR,102,1,2025
+Mechanical Engineering,MATH,151,1,2025
+Mechanical Engineering,UCC Elective,1,1,2025
+Mechanical Engineering,PHYS,216,2,2025
+Mechanical Engineering,MATH,152,2,2025
+Mechanical Engineering,PHYS,206,2,2025
+Mechanical Engineering,UCC Elective,2,2,2025
+Mechanical Engineering,CHEM,120,2,2025
+Mechanical Engineering,PHYS,217,3,2025
+Mechanical Engineering,MATH,251,3,2025
+Mechanical Engineering,MEEN,210,3,2025
+Mechanical Engineering,MEEN,225,3,2025
+Mechanical Engineering,PHYS,207,3,2025
+Mechanical Engineering,STAT,211,3,2025
+Mechanical Engineering,ECEN,215,4,2025
+Mechanical Engineering,MATH,308,4,2025
+Mechanical Engineering,MEEN,223,4,2025
+Mechanical Engineering,MEEN,315,4,2025
+Mechanical Engineering,MEEN,260,4,2025
+Mechanical Engineering,UCC Elective,3,4,2025
+Mechanical Engineering,MEEN,399,5,2025
+Mechanical Engineering,MEEN,305,5,2025
+Mechanical Engineering,MEEN,344,5,2025
+Mechanical Engineering,MEEN,345,5,2025
+Mechanical Engineering,MEEN,357,5,2025
+Mechanical Engineering,MEEN,363,5,2025
+Mechanical Engineering,MEEN,381,5,2025
+Mechanical Engineering,UCC Elective,4,5,2025
+Mechanical Engineering,MEEN,360,6,2025
+Mechanical Engineering,MEEN,361,6,2025
+Mechanical Engineering,MEEN,364,6,2025
+Mechanical Engineering,MEEN,365,6,2025
+Mechanical Engineering,MEEN,368,6,2025
+Mechanical Engineering,MEEN,461,6,2025
+Mechanical Engineering,MEEN,464,6,2025
+Mechanical Engineering,ISEN,302,7,2025
+Mechanical Engineering,MEEN,401,7,2025
+Mechanical Engineering,UCC Elective,5,7,2025
+Mechanical Engineering,Technical Elective,1,7,2025
+Mechanical Engineering,Technical Elective,2,7,2025
+Mechanical Engineering,Technical Elective,3,7,2025
+Mechanical Engineering,MEEN,402,8,2025
+Mechanical Engineering,UCC Elective,6,8,2025
+Mechanical Engineering,UCC Elective,7,8,2025
+Mechanical Engineering,Technical Elective,4,8,2025
+Mechanical Engineering,General Elective,1,8,2025
+Interdisciplinary Engineering,CHEM,107,1,2025
+Interdisciplinary Engineering,CHEM,117,1,2025
+Interdisciplinary Engineering,ENGL,104,1,2025
+Interdisciplinary Engineering,ENGR,102,1,2025
+Interdisciplinary Engineering,MATH,151,1,2025
+Interdisciplinary Engineering,UCC Elective,1,1,2025
+Interdisciplinary Engineering,PHYS,216,2,2025
+Interdisciplinary Engineering,MATH,152,2,2025
+Interdisciplinary Engineering,PHYS,206,2,2025
+Interdisciplinary Engineering,UCC Elective,2,2,2025
+Interdisciplinary Engineering,CHEM,120,2,2025
+Interdisciplinary Engineering,PHYS,217,3,2025
+Interdisciplinary Engineering,ITDE,201,3,2025
+Interdisciplinary Engineering,MATH,251,3,2025
+Interdisciplinary Engineering,PHYS,207,3,2025
+Interdisciplinary Engineering,Technical Elective,1,3,2025
+Interdisciplinary Engineering,COMM,203,3,2025
+Interdisciplinary Engineering,MATH,308,4,2025
+Interdisciplinary Engineering,UCC Elective,3,4,2025
+Interdisciplinary Engineering,Technical Elective,2,4,2025
+Interdisciplinary Engineering,Technical Elective,3,4,2025
+Interdisciplinary Engineering,Technical Elective,4,4,2025
+Interdisciplinary Engineering,ITDE,399,5,2025
+Interdisciplinary Engineering,ITDE,301,5,2025
+Interdisciplinary Engineering,MATH,304,5,2025
+Interdisciplinary Engineering,UCC Elective,4,5,2025
+Interdisciplinary Engineering,Technical Elective,5,5,2025
+Interdisciplinary Engineering,Technical Elective,6,5,2025
+Interdisciplinary Engineering,Technical Elective,7,5,2025
+Interdisciplinary Engineering,Math/Science Elective,1,6,2025
+Interdisciplinary Engineering,Technical Elective,8,6,2025
+Interdisciplinary Engineering,Technical Elective,9,6,2025
+Interdisciplinary Engineering,Technical Elective,10,6,2025
+Interdisciplinary Engineering,Technical Elective,11,6,2025
+Interdisciplinary Engineering,Technical Elective,12,6,2025
+Interdisciplinary Engineering,ITDE,401,7,2025
+Interdisciplinary Engineering,UCC Elective,5,7,2025
+Interdisciplinary Engineering,Technical Elective,13,7,2025
+Interdisciplinary Engineering,Technical Elective,14,7,2025
+Interdisciplinary Engineering,Technical Elective,15,7,2025
+Interdisciplinary Engineering,ITDE,402,8,2025
+Interdisciplinary Engineering,ITDE,499,8,2025
+Interdisciplinary Engineering,Technical Elective,16,8,2025
+Interdisciplinary Engineering,Technical Elective,17,8,2025
+Interdisciplinary Engineering,Technical Elective,18,8,2025
+Interdisciplinary Engineering,Technical Elective,19,8,2025
+Interdisciplinary Engineering,Technical Elective,20,8,2025
+Nuclear Engineering,CHEM,107,1,2025
+Nuclear Engineering,CHEM,117,1,2025
+Nuclear Engineering,ENGL,104,1,2025
+Nuclear Engineering,ENGR,102,1,2025
+Nuclear Engineering,MATH,151,1,2025
+Nuclear Engineering,UCC Elective,1,1,2025
+Nuclear Engineering,PHYS,216,2,2025
+Nuclear Engineering,MATH,152,2,2025
+Nuclear Engineering,PHYS,206,2,2025
+Nuclear Engineering,UCC Elective,2,2,2025
+Nuclear Engineering,CHEM,120,2,2025
+Nuclear Engineering,PHYS,217,3,2025
+Nuclear Engineering,MATH,251,3,2025
+Nuclear Engineering,MEEN,221,3,2025
+Nuclear Engineering,NUEN,101,3,2025
+Nuclear Engineering,NUEN,201,3,2025
+Nuclear Engineering,PHYS,207,3,2025
+Nuclear Engineering,UCC Elective,3,3,2025
+Nuclear Engineering,ECEN,215,4,2025
+Nuclear Engineering,MATH,308,4,2025
+Nuclear Engineering,NUEN,265,4,2025
+Nuclear Engineering,NUEN,315,4,2025
+Nuclear Engineering,NUEN,302,4,2025
+Nuclear Engineering,NUEN,102,4,2025
+Nuclear Engineering,NUEN,301,5,2025
+Nuclear Engineering,MATH,309,5,2025
+Nuclear Engineering,MEEN,344,5,2025
+Nuclear Engineering,NUEN,309,5,2025
+Nuclear Engineering,COMM,203,5,2025
+Nuclear Engineering,ISEN,302,6,2025
+Nuclear Engineering,MEEN,461,6,2025
+Nuclear Engineering,NUEN,303,6,2025
+Nuclear Engineering,NUEN,304,6,2025
+Nuclear Engineering,NUEN,329,6,2025
+Nuclear Engineering,NUEN,405,7,2025
+Nuclear Engineering,NUEN,406,7,2025
+Nuclear Engineering,NUEN,418,7,2025
+Nuclear Engineering,UCC Elective,4,7,2025
+Nuclear Engineering,Technical Elective,1,7,2025
+Nuclear Engineering,NUEN,410,8,2025
+Nuclear Engineering,NUEN,481,8,2025
+Nuclear Engineering,UCC Elective,5,8,2025
+Nuclear Engineering,UCC Elective,6,8,2025
+Nuclear Engineering,NUEN Technical Elective,1,8,2025
+Nuclear Engineering,Technical Elective,2,8,2025
+Ocean Engineering,CHEM,107,1,2025
+Ocean Engineering,CHEM,117,1,2025
+Ocean Engineering,ENGL,104,1,2025
+Ocean Engineering,ENGR,102,1,2025
+Ocean Engineering,MATH,151,1,2025
+Ocean Engineering,UCC Elective,1,1,2025
+Ocean Engineering,PHYS,216,2,2025
+Ocean Engineering,MATH,152,2,2025
+Ocean Engineering,PHYS,206,2,2025
+Ocean Engineering,UCC Elective,2,2,2025
+Ocean Engineering,CHEM,120,2,2025
+Ocean Engineering,PHYS,217,3,2025
+Ocean Engineering,MATH,251,3,2025
+Ocean Engineering,PHYS,207,3,2025
+Ocean Engineering,OCEN,201,3,2025
+Ocean Engineering,OCEN,221,3,2025
+Ocean Engineering,UCC Elective,3,3,2025
+Ocean Engineering,ENGL,210,4,2025
+Ocean Engineering,MATH,308,4,2025
+Ocean Engineering,MEEN,315,4,2025
+Ocean Engineering,OCEN,213,4,2025
+Ocean Engineering,OCEN,214,4,2025
+Ocean Engineering,STAT,211,4,2025
+Ocean Engineering,OCEN,311,5,2025
+Ocean Engineering,OCEN,336,5,2025
+Ocean Engineering,OCEN,351,5,2025
+Ocean Engineering,OCEN,361,5,2025
+Ocean Engineering,OCNG,310,5,2025
+Ocean Engineering,UCC Elective,4,5,2025
+Ocean Engineering,OCEN,265,6,2025
+Ocean Engineering,OCEN,300,6,2025
+Ocean Engineering,OCEN,345,6,2025
+Ocean Engineering,OCEN,352,6,2025
+Ocean Engineering,OCEN,362,6,2025
+Ocean Engineering,OCEN,399,6,2025
+Ocean Engineering,OCEN,400,7,2025
+Ocean Engineering,OCEN,402,7,2025
+Ocean Engineering,OCEN,403,7,2025
+Ocean Engineering,OCEN,406,7,2025
+Ocean Engineering,UCC Elective,5,7,2025
+Ocean Engineering,Technical Elective I,7,2025
+Ocean Engineering,OCEN,407,8,2025
+Ocean Engineering,OCEN,410,8,2025
+Ocean Engineering,OCEN,451,8,2025
+Ocean Engineering,OCEN,481,8,2025
+Ocean Engineering,UCC Elective,6,8,2025
+Ocean Engineering,Technical Elective II,8,2025
+Petroleum Engineering,CHEM,107,1,2025
+Petroleum Engineering,CHEM,117,1,2025
+Petroleum Engineering,ENGL,104,1,2025
+Petroleum Engineering,ENGR,102,1,2025
+Petroleum Engineering,MATH,151,1,2025
+Petroleum Engineering,UCC Elective,1,1,2025
+Petroleum Engineering,PHYS,216,2,2025
+Petroleum Engineering,MATH,152,2,2025
+Petroleum Engineering,PHYS,206,2,2025
+Petroleum Engineering,UCC Elective,2,2,2025
+Petroleum Engineering,CHEM,120,2,2025
+Petroleum Engineering,PHYS,217,3,2025
+Petroleum Engineering,GEOL,104,3,2025
+Petroleum Engineering,MATH,251,3,2025
+Petroleum Engineering,MEEN,221,3,2025
+Petroleum Engineering,PHYS,207,3,2025
+Petroleum Engineering,CVEN,305,4,2025
+Petroleum Engineering,MATH,308,4,2025
+Petroleum Engineering,PETE,225,4,2025
+Petroleum Engineering,PETE,311,4,2025
+Petroleum Engineering,PETE,315,4,2025
+Petroleum Engineering,GEOL,404,5,2025
+Petroleum Engineering,PETE,219,5,2025
+Petroleum Engineering,PETE,301,5,2025
+Petroleum Engineering,PETE,310,5,2025
+Petroleum Engineering,PETE,314,5,2025
+Petroleum Engineering,PETE,335,5,2025
+Petroleum Engineering,PETE,321,6,2025
+Petroleum Engineering,PETE,323,6,2025
+Petroleum Engineering,PETE,324,6,2025
+Petroleum Engineering,PETE,325,6,2025
+Petroleum Engineering,PETE,337,6,2025
+Petroleum Engineering,PETE,353,6,2025
+Petroleum Engineering,PETE,300,7,2025
+Petroleum Engineering,PETE,355,7,2025
+Petroleum Engineering,PETE,401,7,2025
+Petroleum Engineering,PETE,404,7,2025
+Petroleum Engineering,PETE,410,7,2025
+Petroleum Engineering,PETE,435,7,2025
+Petroleum Engineering,UCC Elective,3,7,2025
+Petroleum Engineering,UCC Elective,4,7,2025
+Petroleum Engineering,PETE,402,8,2025
+Petroleum Engineering,PETE,437,8,2025
+Petroleum Engineering,PHIL,482,8,2025
+Petroleum Engineering,UCC Elective,5,8,2025
+Petroleum Engineering,UCC Elective,6,8,2025
+Petroleum Engineering,Technical Elective,1,8,2025
+Petroleum Engineering,Technical Elective,2,8,2025
+Information Technology Service Management,CSCE,111,1,2025
+Information Technology Service Management,ENGL,104,1,2025
+Information Technology Service Management,ITSV,101,1,2025
+Information Technology Service Management,MATH,140,1,2025
+Information Technology Service Management,UCC Elective,1,1,2025
+Information Technology Service Management,CSCE,120,2,2025
+Information Technology Service Management,PHIL,240,2,2025
+Information Technology Service Management,COMM,203,2,2025
+Information Technology Service Management,UCC Elective,2,2,2025
+Information Technology Service Management,UCC Elective,3,2,2025
+Information Technology Service Management,EHRD,203,3,2025
+Information Technology Service Management,ITSV,272,3,2025
+Information Technology Service Management,MGMT,209,3,2025
+Information Technology Service Management,STAT,201,3,2025
+Information Technology Service Management,UCC Elective,4,3,2025
+Information Technology Service Management,ECON,202,4,2025
+Information Technology Service Management,ENGL,210,4,2025
+Information Technology Service Management,ITSV,274,4,2025
+Information Technology Service Management,UCC Elective,5,4,2025
+Information Technology Service Management,Prescribed Elective,1,4,2025
+Information Technology Service Management,ITSV,303,5,2025
+Information Technology Service Management,ITSV,308,5,2025
+Information Technology Service Management,UCC Elective,6,5,2025
+Information Technology Service Management,Prescribed Elective,2,5,2025
+Information Technology Service Management,Prescribed Elective,3,5,2025
+Information Technology Service Management,ITSV,316,6,2025
+Information Technology Service Management,ITSV,385,6,2025
+Information Technology Service Management,ITSV,396,6,2025
+Information Technology Service Management,UCC Elective,7,6,2025
+Information Technology Service Management,Prescribed Elective,4,6,2025
+Information Technology Service Management,ITSV,412,7,2025
+Information Technology Service Management,ITSV,475,7,2025
+Information Technology Service Management,UCC Elective,8,7,2025
+Information Technology Service Management,Prescribed Elective,5,7,2025
+Information Technology Service Management,Prescribed Elective,6,7,2025
+Information Technology Service Management,ITSV,465,8,2025
+Information Technology Service Management,ITSV,476,8,2025
+Information Technology Service Management,UCC Elective,9,8,2025
+Information Technology Service Management,Prescribed Elective,7,8,2025
+Manufacturing and Mechanical Engineering Technology,CHEM,107,1,2025
+Manufacturing and Mechanical Engineering Technology,CHEM,117,1,2025
+Manufacturing and Mechanical Engineering Technology,ENGL,104,1,2025
+Manufacturing and Mechanical Engineering Technology,ENGR,102,1,2025
+Manufacturing and Mechanical Engineering Technology,MATH,151,1,2025
+Manufacturing and Mechanical Engineering Technology,UCC Elective,1,1,2025
+Manufacturing and Mechanical Engineering Technology,PHYS,216,2,2025
+Manufacturing and Mechanical Engineering Technology,MATH,152,2,2025
+Manufacturing and Mechanical Engineering Technology,PHYS,206,2,2025
+Manufacturing and Mechanical Engineering Technology,UCC Elective,2,2,2025
+Manufacturing and Mechanical Engineering Technology,CHEM,120,2,2025
+Manufacturing and Mechanical Engineering Technology,PHYS,217,3,2025
+Manufacturing and Mechanical Engineering Technology,MMET,105,3,2025
+Manufacturing and Mechanical Engineering Technology,MMET,181,3,2025
+Manufacturing and Mechanical Engineering Technology,MMET,206,3,2025
+Manufacturing and Mechanical Engineering Technology,PHYS,207,3,2025
+Manufacturing and Mechanical Engineering Technology,STAT,211,3,2025
+Manufacturing and Mechanical Engineering Technology,ISEN,302,4,2025
+Manufacturing and Mechanical Engineering Technology,MMET,207,4,2025
+Manufacturing and Mechanical Engineering Technology,MMET,275,4,2025
+Manufacturing and Mechanical Engineering Technology,MMET,281,4,2025
+Manufacturing and Mechanical Engineering Technology,ENGL,210,4,2025
+Manufacturing and Mechanical Engineering Technology,UCC Elective,3,4,2025
+Manufacturing and Mechanical Engineering Technology,ESET,300,5,2025
+Manufacturing and Mechanical Engineering Technology,MMET,303,5,2025
+Manufacturing and Mechanical Engineering Technology,MMET,376,5,2025
+Manufacturing and Mechanical Engineering Technology,MMET,380,5,2025
+Manufacturing and Mechanical Engineering Technology,UCC Elective,4,5,2025
+Manufacturing and Mechanical Engineering Technology,MMET,320,6,2025
+Manufacturing and Mechanical Engineering Technology,MMET,361,6,2025
+Manufacturing and Mechanical Engineering Technology,MMET,363,6,2025
+Manufacturing and Mechanical Engineering Technology,MMET,383,6,2025
+Manufacturing and Mechanical Engineering Technology,Technical Elective,1,6,2025
+Manufacturing and Mechanical Engineering Technology,ENTC,399,6,2025
+Manufacturing and Mechanical Engineering Technology,MMET,370,7,2025
+Manufacturing and Mechanical Engineering Technology,MMET,402,7,2025
+Manufacturing and Mechanical Engineering Technology,MMET,410,7,2025
+Manufacturing and Mechanical Engineering Technology,MMET,429,7,2025
+Manufacturing and Mechanical Engineering Technology,MMET,463,7,2025
+Manufacturing and Mechanical Engineering Technology,MMET,412,8,2025
+Manufacturing and Mechanical Engineering Technology,MMET,422,8,2025
+Manufacturing and Mechanical Engineering Technology,UCC Elective,5,8,2025
+Manufacturing and Mechanical Engineering Technology,UCC Elective,6,8,2025
+Manufacturing and Mechanical Engineering Technology,Technical Elective,2,8,2025
