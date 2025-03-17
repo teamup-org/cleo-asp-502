@@ -20,6 +20,7 @@ class ChangePrimaryKeyInStudents < ActiveRecord::Migration[7.2]
   end
 
   def down
+    if table_exists?(:student_courses)
     drop_table :student_courses
 
     remove_column :students, :google_id
@@ -34,5 +35,6 @@ class ChangePrimaryKeyInStudents < ActiveRecord::Migration[7.2]
     end
 
     add_index :student_courses, %i[student_id course_id], unique: true
+  end
   end
 end

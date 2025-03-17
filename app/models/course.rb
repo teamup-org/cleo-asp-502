@@ -3,8 +3,8 @@
 class Course < ApplicationRecord
   # Validations
   validates :ccode, :cnumber, presence: true
-  validates :credit_hours, :lecture_hours, :lab_hours, :cnumber, numericality: { only_integer: true }
-  validates :ccode, length: { minimum: 4, maximimum: 30 }
+  validates :credit_hours, :lecture_hours, :lab_hours, numericality: { only_integer: true }
+  validates :ccode, length: { minimum: 3, maximimum: 30 }
   validates :ccode, uniqueness: { scope: :cnumber }
 
   # Prerequisites associations
