@@ -39,7 +39,7 @@ class Student < ApplicationRecord
 
   belongs_to :emphasis, optional: true
   # belongs_to :emphasis, foreign_key: :emphases_id, optional: true
-
+  has_many :schedules, foreign_key: :student_google_id
   def total_credits_completed
     courses.sum(:credit_hours)
   end

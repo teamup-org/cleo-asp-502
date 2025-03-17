@@ -1,0 +1,36 @@
+
+<%= form_with url: schedule_path, method: :get, html: { class: "inline-form" } do |form| %>
+  <%= form.hidden_field :semester_num, value: params[:semester_num] %>
+  <%= form.hidden_field :student_id, value: params[:student_id] %>
+  <%= form.hidden_field :class_ids, value: @selected_class_ids.join(',')%>
+  <%= form.hidden_field :select_class, value:c.id%>
+  <%
+  extra = ""
+  if @selected_class_ids.include?(c.id) && !isSaved
+    extra = " selected"
+  end
+  %>
+  <div class="<%="class"+extra%>" onclick="this.closest('form').submit(); return false;">
+    <p><%=course.ccode+" "%><%=course.cnumber%></p>
+    <p><%= c.class_type%></p>
+    <p><%= c.id%></p>
+    <p><%=
+    if @selected_class_ids.include?(c.id) || isSaved || get_emoji(course,c).size != 1
+        get_emoji(course, c).drop(1)
+    end
+    %></p>
+    <% if @selected_class_ids.include?(c.id)%>
+    <%= form_with url: schedule_path, method: :get, html: { class: "inline-form" } do |form| %>
+            <%= form.hidden_field :class_id, value: params[:class_id] %>
+            <%= form.hidden_field :semester_num, value: params[:semester_num] %>
+            <%= form.hidden_field :student_id, value: params[:student_id] %>
+            <%= form.hidden_field :save_id, value: c.id %>
+          <% if @selected_class_ids.include?(c.id) && !isSaved%>
+                <%= form.submit "Save Course", class: "btn btn-primary" %>
+          <%else%>
+          <%= form.submit "Remove Course", class: "btn btn-primary" %>
+          <%end%>
+        <% end %>
+    <% end %>    
+    </div>
+<%end%>
