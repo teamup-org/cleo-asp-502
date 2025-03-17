@@ -9,6 +9,7 @@ FILENAME="backup-$TIMESTAMP.sql"
 if [ -z "$DATABASE_URL" ]; then
   if [ -f .env ]; then
     DATABASE_URL=$(grep -E '^DATABASE_URL=' .env | cut -d '=' -f2)
+    # echo 'URL=$DATABASE_URL'
   else
     echo "❌ Error: DATABASE_URL not set and no .env file found!"
     exit 1
