@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @transcript_course %>
+
+<div>
+  <%= link_to "Edit this transcript course", edit_transcript_course_path(@transcript_course) %> |
+  <%= link_to "Back to transcript courses", transcript_courses_path %>
+
+  <%= button_to "Destroy this transcript course", @transcript_course, method: :delete %>
+</div>

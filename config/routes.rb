@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # root "student_dashboards#show"
+  resources :transcript_courses
+  # schedule
+  get '/schedule', to: 'schedule#index', as: 'schedule'
+  post '/select_class', to: 'scheduel#select_class'
+  post '/schedule', to: 'schedule#create'
 
   devise_for :student_logins, controllers: { omniauth_callbacks: 'student_logins/omniauth_callbacks' }
 
@@ -85,6 +89,7 @@ Rails.application.routes.draw do
       get 'confirm_destroy'
       get 'degree_planner', to: 'degree_planner#show'
       post 'degree_planner', to: 'degree_planner#generate_custom_plan'
+      get 'transcript'
     end
 
     resource :degree_planner, only: [:show], controller: 'degree_planner' do
@@ -97,6 +102,10 @@ Rails.application.routes.draw do
       post :set_default, on: :member
       post :upload_plan, on: :member
       get :view_template, on: :member
+    end
+
+    resource :transcript_courses, only: [:show], controller: 'transcript_courses' do
+      post :upload_transcript, on: :member
     end
   end
 

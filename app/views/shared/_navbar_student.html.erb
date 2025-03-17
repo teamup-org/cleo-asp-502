@@ -25,6 +25,7 @@
         <!-- Dropdown Menu -->
         <div class="profile-dropdown-menu" id="dropdown-menu">
           <%= link_to "Profile", profile_student_path(current_student_login), class: 'profile-dropdown-link'%>
+          <%= link_to "Transcript", transcript_student_path(current_student_login), class: 'profile-dropdown-link'%>
           <%= link_to 'Sign Out', destroy_student_login_session_path, method: :delete, class: 'profile-dropdown-link' %>
         </div>
       </div>
