@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,13 +88,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
   create_table "courses", force: :cascade do |t|
     t.integer "cnumber"
     t.string "cname", limit: 255
-    t.text "description"
     t.integer "credit_hours", default: 0
     t.integer "lecture_hours", default: 0
     t.integer "lab_hours", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccode", limit: 30
+    t.text "description"
     t.index ["ccode", "cnumber"], name: "index_courses_on_ccode_and_cnumber", unique: true
   end
 
@@ -149,6 +149,25 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
     t.index ["course_id", "prereq_id", "equi_id"], name: "index_prerequisites_on_course_id_and_prereq_id_and_equi_id", unique: true
     t.index ["course_id"], name: "index_prerequisites_on_course_id"
     t.index ["prereq_id"], name: "index_prerequisites_on_prereq_id"
+  end
+
+  create_table "schedule_classes", force: :cascade do |t|
+    t.integer "semester", null: false
+    t.string "student_google_id", null: false
+    t.bigint "class_attribute_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["class_attribute_id"], name: "index_schedule_classes_on_class_attribute_id"
+    t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_class_in_schedule", unique: true
+    t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_course_in_schedule", unique: true
+    t.index ["semester", "student_google_id"], name: "idx_schedule_classes_on_schedule"
+  end
+
+  create_table "schedules", id: false, force: :cascade do |t|
+    t.integer "semester"
+    t.string "student_google_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "student_courses", id: false, force: :cascade do |t|
@@ -222,6 +241,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
   add_foreign_key "degree_requirements", "majors"
   add_foreign_key "prerequisites", "courses"
   add_foreign_key "prerequisites", "courses", column: "prereq_id"
+  add_foreign_key "schedule_classes", "class_attributes"
+  add_foreign_key "schedules", "students", column: "student_google_id", primary_key: "google_id"
   add_foreign_key "student_courses", "students", primary_key: "google_id"
   add_foreign_key "transcript_courses", "courses"
   add_foreign_key "transcript_courses", "students", primary_key: "google_id"
