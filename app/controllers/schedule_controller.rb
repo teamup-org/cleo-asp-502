@@ -1,6 +1,6 @@
 class ScheduleController < ApplicationController
   def create
-    schedule_path(semester_num: params[:semester_num], student_id: params[:student_id],class_ids:params[:class_ids],select_class:params[:select_class])
+    schedule_path()
   end
   helper_method :get_emoji
 
@@ -63,6 +63,7 @@ class ScheduleController < ApplicationController
       @selected_class_ids = params[:class_ids].split(',').map(&:to_i)
       if @selected_class_ids.include?(select_id)
         @selected_class_ids.delete(select_id)
+        puts "PGPG"
       else
         @selected_class_ids.push(select_id)
       end
