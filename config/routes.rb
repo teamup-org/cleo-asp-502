@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :transcript_courses
   # schedule
   get '/schedule', to: 'schedule#index', as: 'schedule'
   post '/select_class', to: 'scheduel#select_class'
