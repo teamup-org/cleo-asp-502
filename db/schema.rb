@@ -208,16 +208,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_06_200240) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "transcript_courses", force: :cascade do |t|
-    t.string "student_id", null: false
-    t.bigint "course_id", null: false
-    t.string "grade", null: false
-    t.integer "semester", null: false
-    t.integer "year", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "class_attributes", "courses"
   add_foreign_key "class_meeting_attributes", "class_attributes"
   add_foreign_key "course_core_categories", "core_categories"
