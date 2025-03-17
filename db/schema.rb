@@ -159,7 +159,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_13_232343) do
     t.datetime "updated_at", null: false
     t.index ["class_attribute_id"], name: "index_schedule_classes_on_class_attribute_id"
     t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_class_in_schedule", unique: true
-    t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_course_in_schedule", unique: true
     t.index ["semester", "student_google_id"], name: "idx_schedule_classes_on_schedule"
   end
 
