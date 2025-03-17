@@ -1,6 +1,5 @@
 class AddClassMeetingAttributes < ActiveRecord::Migration[7.2]
     def up
-      unless table_exists?(:class_meeting_attributes)
         create_table :class_meeting_attributes do |t|
             t.boolean :sunday
             t.boolean :monday
@@ -16,10 +15,9 @@ class AddClassMeetingAttributes < ActiveRecord::Migration[7.2]
             t.string :location
             t.string :meeting_type
             t.references :class_attribute, null: false, foreign_key: true
-    
+
             t.timestamps
         end
-      end
     end
     def down
       drop_table :class_meeting_attributes
