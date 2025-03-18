@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_13_232343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,13 +88,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
   create_table "courses", force: :cascade do |t|
     t.integer "cnumber"
     t.string "cname", limit: 255
+    t.text "description"
     t.integer "credit_hours", default: 0
     t.integer "lecture_hours", default: 0
     t.integer "lab_hours", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccode", limit: 30
-    t.text "description"
     t.index ["ccode", "cnumber"], name: "index_courses_on_ccode_and_cnumber", unique: true
   end
 
@@ -159,7 +159,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
     t.datetime "updated_at", null: false
     t.index ["class_attribute_id"], name: "index_schedule_classes_on_class_attribute_id"
     t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_class_in_schedule", unique: true
-    t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_course_in_schedule", unique: true
     t.index ["semester", "student_google_id"], name: "idx_schedule_classes_on_schedule"
   end
 
@@ -217,6 +216,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "transcript_courses", force: :cascade do |t|
+    t.string "student_id", null: false
+    t.bigint "course_id", null: false
+    t.string "grade", null: false
+    t.integer "semester", null: false
+    t.integer "year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "class_attributes", "courses"
   add_foreign_key "class_meeting_attributes", "class_attributes"
   add_foreign_key "course_core_categories", "core_categories"
@@ -234,4 +243,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
   add_foreign_key "schedule_classes", "class_attributes"
   add_foreign_key "schedules", "students", column: "student_google_id", primary_key: "google_id"
   add_foreign_key "student_courses", "students", primary_key: "google_id"
+  add_foreign_key "transcript_courses", "courses"
+  add_foreign_key "transcript_courses", "students", primary_key: "google_id"
 end

@@ -30,6 +30,11 @@ class Student < ApplicationRecord
   has_many :schedule_classes
 
 
+
+  # Transcript courses association
+  has_many :transcript_courses, dependent: :destroy
+  has_many :courses, through: :transcript_courses
+
   belongs_to :major
 
   belongs_to :track, optional: true

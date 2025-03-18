@@ -69,3 +69,6 @@ yarn-debug.log*
 /public/uploadscoverage
 
 /config/master.key
+
+#Ignore backups
+/backups/
