@@ -2,7 +2,7 @@
 
 class Major < ApplicationRecord
   # Validations
-  validates :mname, :cname, presence: true
+  validates :mname, :cname, presence: true 
   validates :mname, uniqueness: { scope: :cname }
   validates :mname,
             format: { with: %r{\A[\w\s,/]+\z},

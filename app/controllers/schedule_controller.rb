@@ -1,6 +1,6 @@
 class ScheduleController < ApplicationController
   def create
-    schedule_path(semester_num: params[:semester_num], student_id: params[:student_id],class_ids:params[:class_ids],select_class:params[:select_class])
+    schedule_path()
   end
   helper_method :get_emoji
 
@@ -63,6 +63,7 @@ class ScheduleController < ApplicationController
       @selected_class_ids = params[:class_ids].split(',').map(&:to_i)
       if @selected_class_ids.include?(select_id)
         @selected_class_ids.delete(select_id)
+        puts "PGPG"
       else
         @selected_class_ids.push(select_id)
       end
@@ -168,5 +169,12 @@ def index
       end
     end
     check_class_array_times(@all_selected_classes, @all_classes)
+    selected_minus_scheduled = []
+    @scheduled_classes.values.to_a.each do |c|
+      unless @all_selected_classes.include?(c)
+        selected_minus_scheduled.push(c)
+      end
+    end
+    check_class_array_times(selected_minus_scheduled, @all_classes)
 end
 end

@@ -1,16 +1,20 @@
 
-<%= form_with url: schedule_path, method: :get, html: { class: "inline-form" } do |form| %>
+<%= form_with url: schedule_path, method: :get, html: { class: "inline-form", id: "schedule-form-#{c.id}" } do |form| %>
   <%= form.hidden_field :semester_num, value: params[:semester_num] %>
   <%= form.hidden_field :student_id, value: params[:student_id] %>
-  <%= form.hidden_field :class_ids, value: @selected_class_ids.join(',')%>
-  <%= form.hidden_field :select_class, value:c.id%>
+  <%= form.hidden_field :class_ids, value: @selected_class_ids.join(',') %>
+  <%= form.hidden_field :select_class, value: c.id %>
   <%
   extra = ""
-  if @selected_class_ids.include?(c.id) && !isSaved
+  if @selected_class_ids.include?(c.id) || isSaved
     extra = " selected"
   end
   %>
-  <div class="<%="class"+extra%>" onclick="this.closest('form').submit(); return false;">
+  <div class="<%= "class" + extra %>" onclick="document.getElementById('schedule-form-<%= c.id %>').submit(); return false;", >
+    
+    <p> <%if @selected_class_ids.include?(c.id) || isSaved%>
+    <%=get_emoji(course, c)[0]%>
+    <%end%></p>
     <p><%=course.ccode+" "%><%=course.cnumber%></p>
     <p><%= c.class_type%></p>
     <p><%= c.id%></p>
@@ -21,16 +25,30 @@
     %></p>
     <% if @selected_class_ids.include?(c.id)%>
     <%= form_with url: schedule_path, method: :get, html: { class: "inline-form" } do |form| %>
-            <%= form.hidden_field :class_id, value: params[:class_id] %>
-            <%= form.hidden_field :semester_num, value: params[:semester_num] %>
-            <%= form.hidden_field :student_id, value: params[:student_id] %>
-            <%= form.hidden_field :save_id, value: c.id %>
           <% if @selected_class_ids.include?(c.id) && !isSaved%>
-                <%= form.submit "Save Course", class: "btn btn-primary" %>
+            <%= form.submit "Save Course", class: "btn btn-primary", onclick: "addHiddenFields(this.form, '#{c.id}'); event.stopPropagation();" %>
           <%else%>
-          <%= form.submit "Remove Course", class: "btn btn-primary" %>
+            <%= form.submit "Remove Course", class: "btn btn-primary", onclick: "addHiddenFields(this.form, '#{c.id}'); event.stopPropagation();" %>
           <%end%>
         <% end %>
     <% end %>    
     </div>
 <%end%>
+<script>
+  function addHiddenFields(form, courseId) {
+  let fields = [
+    { name: 'class_id', value: '<%= params[:class_id] %>' },
+    { name: 'semester_num', value: '<%= params[:semester_num] %>' },
+    { name: 'student_id', value: '<%= params[:student_id] %>' },
+    { name: 'save_id', value: courseId }
+  ];
+  
+  fields.forEach(field => {
+    let input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = field.name;
+    input.value = field.value;
+    form.appendChild(input);
+  });
+}
+</script>
