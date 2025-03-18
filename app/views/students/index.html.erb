@@ -22,6 +22,8 @@
       <th>Enrollment Semester</th>
       <th>Graduation Semester</th>
       <th>Major</th> <!-- New column for Major -->
+      <th>Academic Standing</th> <!-- New column for Academic Standing -->
+      <th>Preference for Online Classes</th> <!-- New column for Preference -->
       <th>Actions</th>
     </tr>
   </thead>
@@ -37,6 +39,8 @@
         <td><%= student.enrol_semester %></td>
         <td><%= student.grad_semester %></td>
         <td><%= student.major.present? ? student.major.mname : 'N/A' %></td> 
+        <td><%= student.academic_standing.present? ? student.academic_standing.humanize : 'N/A' %></td> <!-- Display Academic Standing -->
+        <td><%= student.preference_online ? 'Yes' : 'No' %></td> <!-- Display Preference for Online Classes -->
         <td>
           <%= link_to 'Edit', edit_student_path(student) %> 
           <%= link_to 'Delete', confirm_destroy_student_path(student), method: :get %>

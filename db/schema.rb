@@ -206,6 +206,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
     t.boolean "is_admin", default: false, null: false
     t.bigint "track_id"
     t.bigint "emphasis_id"
+    t.string "academic_standing"
+    t.boolean "preference_online"
     t.index ["emphasis_id"], name: "index_students_on_emphasis_id"
     t.index ["major_id"], name: "index_students_on_major_id"
     t.index ["track_id"], name: "index_students_on_track_id"
