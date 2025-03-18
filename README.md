@@ -99,12 +99,6 @@ You can run all the tests by using the following command. This runs all tests, i
 
 Run the following code in Powershell or regular terminal if using Windows or Linux/Mac OS respectively:
 
-Navigate to project directory
-
-```
-cd cleo-course-scheduler
-```
-
 Run the app
 
 ```
