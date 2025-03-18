@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_13_232343) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,13 +88,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_13_232343) do
   create_table "courses", force: :cascade do |t|
     t.integer "cnumber"
     t.string "cname", limit: 255
-    t.text "description"
     t.integer "credit_hours", default: 0
     t.integer "lecture_hours", default: 0
     t.integer "lab_hours", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ccode", limit: 30
+    t.text "description"
     t.index ["ccode", "cnumber"], name: "index_courses_on_ccode_and_cnumber", unique: true
   end
 
@@ -159,6 +159,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_13_232343) do
     t.datetime "updated_at", null: false
     t.index ["class_attribute_id"], name: "index_schedule_classes_on_class_attribute_id"
     t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_class_in_schedule", unique: true
+    t.index ["semester", "student_google_id", "class_attribute_id"], name: "idx_unique_course_in_schedule", unique: true
     t.index ["semester", "student_google_id"], name: "idx_schedule_classes_on_schedule"
   end
 

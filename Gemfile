@@ -11,7 +11,7 @@ gem "jbuilder"
 gem 'rubocop', require: false
 gem 'rexml'
 gem 'zeitwerk', '< 2.7.0'
-gem "mini_racer", "~> 0.16.0"
+#gem "mini_racer", "~> 0.16.0"
 
 # Add net-pop with a specific version
 
