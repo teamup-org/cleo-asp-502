@@ -169,5 +169,12 @@ def index
       end
     end
     check_class_array_times(@all_selected_classes, @all_classes)
+    selected_minus_scheduled = []
+    @scheduled_classes.values.to_a.each do |c|
+      unless @all_selected_classes.include?(c)
+        selected_minus_scheduled.push(c)
+      end
+    end
+    check_class_array_times(selected_minus_scheduled, @all_classes)
 end
 end
