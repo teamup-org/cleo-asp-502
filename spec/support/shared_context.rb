@@ -41,6 +41,6 @@ RSpec.shared_context 'models setup', shared_context: :metadata do
     )
   end
   let(:student_course) { StudentCourse.create(student:, course:, sem: 1) }
-
+  let(:transcript_course) { TranscriptCourse.create(student:, course:, semester: 1, year: 2021, grade: 'A') }
   let(:degree_requirement) { DegreeRequirement.create(course:, major:, sem: 1) }
 end

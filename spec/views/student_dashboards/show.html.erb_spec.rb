@@ -13,6 +13,7 @@ RSpec.describe 'student_dashboards/show.html.erb', type: :view do
     allow(view).to receive(:student_degree_planner_path).with(student.google_id).and_return("/student/degree_planner/#{student.google_id}")
     allow(view).to receive(:support_index_path).and_return('/support')
     allow(view).to receive(:destroy_student_login_session_path).and_return('/logout')
+
     render
   end
 

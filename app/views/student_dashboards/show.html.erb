@@ -39,6 +39,7 @@
     <%= link_to 'Home', student_dashboard_path, class: 'sidebar-link' %> <br>
     <%= link_to 'Profile', profile_student_path(current_student_login), class: 'sidebar-link' %> <br>
     <%= link_to 'Degree Planner', student_degree_planner_path(@student&.google_id), class: 'sidebar-link' %> <br>
+    <%= link_to 'Transcript', transcript_student_path(current_student_login), class: 'sidebar-link'%> <br>
     <%= link_to 'Support/Help', support_index_path, class: 'sidebar-link' %> <br>
     <%= link_to 'Sign Out', destroy_student_login_session_path, class: 'sidebar-link logout-button' %>
   </div>
@@ -69,6 +70,7 @@
       <li><%= link_to 'Profile', profile_student_path(current_student_login), class: 'action-button' %></li>
       <li><%= link_to 'View Default Degree Plan', degree_plan_path, class: 'action-button' %></li>
       <li><%= link_to 'Build Your Degree Planner', student_degree_planner_path(@student&.google_id), class: 'action-button' %></li>
+      <li><%= link_to 'View Your Transcript', transcript_student_path(current_student_login), class: 'action-button' %></li>
     </ul>
   </div>
 

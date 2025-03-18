@@ -38,6 +38,30 @@ CSV.foreach(courses_csv, headers: true) do |row|
   )
 end
 
+# Seed with descriptions
+def update_description(path)
+  CSV.foreach(path, headers: true) do |row|
+    cnumber = row['cnumber']
+    ccode = row['ccode']
+    description = row['description']
+    
+    next if cnumber.blank? || ccode.blank? || description.blank?
+    
+    course = Course.find_by(cnumber: cnumber, ccode: ccode)
+    
+    if course
+      course.update(description: description)
+    else
+      #puts "Course not found: #{cnumber} - #{ccode}"
+    end
+  end
+end
+course_descriptions_1 = Rails.root.join('lib', 'data','newData','csv', 'DescriptionData1.csv')
+course_descriptions_2 = Rails.root.join('lib', 'data','newData','csv', 'DescriptionData2.csv')
+update_description(course_descriptions_1)
+update_description(course_descriptions_2)
+
+
 #seed with all courses
 all_courses_path = Rails.root.join('lib', 'data','newData','csv', 'allCourses.csv')
 CSV.foreach(all_courses_path, headers: true) do |row|
@@ -75,7 +99,7 @@ CSV.foreach(all_classes_path, headers: true) do |row|
   ClassAttribute.find_or_create_by!(
     crn: row['crn'],
     course: course,
-    honors: row['honors'] == 'T' ? true : false,
+    #honors: row['honors'] == 'T' ? true : false,
   )
 end
 
@@ -113,6 +137,8 @@ CSV.foreach(all_meetings_path, headers: true) do |row|
     class_attribute: klass, # Correct association reference
   )
 end
+
+
 
 # Seed with majors
 CSV.foreach(majors_csv, headers: true) do |row|
