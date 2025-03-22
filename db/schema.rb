@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_16_233028) do
   create_table "class_attributes", force: :cascade do |t|
     t.integer "crn"
     t.string "class_type"
-    t.string "is_online"
+    t.boolean "is_online"
     t.string "instructor"
     t.boolean "honors"
     t.bigint "course_id", null: false
