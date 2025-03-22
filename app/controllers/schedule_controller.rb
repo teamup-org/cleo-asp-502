@@ -160,7 +160,7 @@ def index
         @all_classes = []
         classes = ClassAttribute.where(course_id: course.id).to_a
         classes.each do |klass|
-          @course_class_emoji_map[course][klass] = [@emoji_array[i % @emoji_array.size][j % @emoji_array[i].size]]
+          @course_class_emoji_map[course][klass] = [@emoji_array[i % @emoji_array.size][j % @emoji_array[i % @emoji_array.size].size]]
           j+=1
           meetings = ClassMeetingAttribute.where(class_attribute_id: klass.id).to_a
           @loaded_classes[course][klass] = meetings
@@ -169,12 +169,5 @@ def index
       end
     end
     check_class_array_times(@all_selected_classes, @all_classes)
-    selected_minus_scheduled = []
-    @scheduled_classes.values.to_a.each do |c|
-      unless @all_selected_classes.include?(c)
-        selected_minus_scheduled.push(c)
-      end
-    end
-    check_class_array_times(selected_minus_scheduled, @all_classes)
-end
+  end
 end

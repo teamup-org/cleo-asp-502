@@ -8,13 +8,14 @@ class ClassMeetingAttribute < ApplicationRecord
 
   def validate_datetime_fields
     [:start_time, :end_time].each do |field|
-      errors.add(field, 'must be a DateTime') unless send(field).is_a?(DateTime)
+errors.add(field, 'must be a DateTime') if send(field).present? && !send(field).is_a?(Time)
+
     end
   end
 
   def validate_date_fields
     [:start_date, :end_date].each do |field|
-      errors.add(field, 'must be a Date') unless send(field).is_a?(Date)
+      errors.add(field, 'must be a Date') if (send(field).present? && !send(field).is_a?(Date))
     end
   end
 end
