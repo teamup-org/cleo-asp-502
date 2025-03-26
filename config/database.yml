@@ -17,21 +17,20 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
   host: localhost
-  username: <%= ENV['DATABASE_USER'] %>
+  username: cleo_asp_502_database_user
   password: <%= ENV['DATABASE_PASSWORD'] %>
-
 
 development:
   <<: *default
-  database: cleo_course_scheduler_development
+  database: cleo_asp_502_database_dev
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: cleo_course_scheduler
+  #username: cleo_asp_502_database_user
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -59,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: cleo_course_scheduler_test
+  database: cleo_asp_502_database_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,6 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: cleo_course_scheduler_production
-  username: cleo_course_scheduler
-  password: <%= ENV["CLEO_COURSE_SCHEDULER_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
