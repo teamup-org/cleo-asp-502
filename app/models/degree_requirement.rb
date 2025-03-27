@@ -3,6 +3,7 @@
 class DegreeRequirement < ApplicationRecord
   validates :year, presence: true
   validates :sem, presence: true, numericality: { only_integer: true }
+  validates :course, presence: true
 
   belongs_to :course
   belongs_to :major
