@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DegreeRequirement < ApplicationRecord
-  validates :year, presence: true
+  validates :year,:course_id, presence: true
   validates :sem, presence: true, numericality: { only_integer: true }
   validates :course, presence: true
 

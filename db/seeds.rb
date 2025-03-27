@@ -67,13 +67,25 @@ def update_description(path)
     end
   end
 end
-course_descriptions_1 = Rails.root.join('lib', 'data', 'newData', 'csv', 'DescriptionData1.csv')
-course_descriptions_2 = Rails.root.join('lib', 'data', 'newData', 'csv', 'DescriptionData2.csv')
+course_descriptions_1 = Rails.root.join('lib', 'data','shortData', 'DescriptionData1.csv')
+course_descriptions_2 = Rails.root.join('lib', 'data','shortData', 'DescriptionData2.csv')
 update_description(course_descriptions_1)
-update_description(course_descriptions_2)
+#update_description(course_descriptions_2)
 
-# seed preresiquites
-all_prereq_path = Rails.root.join('lib', 'data', 'newData', 'csv', 'PrereqData.csv')
+#seed with all courses
+all_courses_path = Rails.root.join('lib', 'data','shortData', 'allCourses.csv')
+CSV.foreach(all_courses_path, headers: true) do |row|
+  Course.find_or_create_by(
+    ccode: row['ccode'],
+    cnumber: row['cnumber'],
+    cname: row['cname'],
+    credit_hours: row['credit_hours'],
+  )
+end
+
+#seed preresiquites
+all_prereq_path = Rails.root.join('lib', 'data','shortData', 'PrereqData.csv')
+
 CSV.foreach(all_prereq_path, headers: true) do |row|
   course = Course.find_by(ccode: row['course_ccode'], cnumber: row['course_cnumber'])
   prereq = Course.find_by(ccode: row['prereq_ccode'], cnumber: row['prereq_cnumber'])
@@ -88,7 +100,8 @@ end
 
 # seed with all classes
 
-all_classes_path = Rails.root.join('lib', 'data', 'newData', 'csv', 'allClassesSpring2025.csv')
+
+all_classes_path = Rails.root.join('lib', 'data','shortData', 'allClassesSpring2025.csv')
 
 # Seed with classes
 CSV.foreach(all_classes_path, headers: true) do |row|
@@ -100,7 +113,7 @@ CSV.foreach(all_classes_path, headers: true) do |row|
   )
 end
 
-all_meetings_path = Rails.root.join('lib', 'data', 'newData', 'csv', 'allClassMeetings.csv')
+all_meetings_path = Rails.root.join('lib', 'data','shortData', 'allClassMeetings.csv')
 
 # Seed with classtimes
 CSV.foreach(all_meetings_path, headers: true) do |row|
