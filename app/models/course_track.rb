@@ -2,7 +2,8 @@
 
 class CourseTrack < ApplicationRecord
   validates :year, presence: true
-
+  validates :track, presence: true
+  validates :course, presence: true
   belongs_to :course
   belongs_to :track
 
