@@ -82,6 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: cleo_course_scheduler_production
-  username: cleo_course_scheduler
-  password: <%= ENV["CLEO_COURSE_SCHEDULER_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
