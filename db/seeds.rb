@@ -192,22 +192,36 @@ CSV.foreach(tracks_csv, headers: true) do |row|
   )
 end
 
-# Seed with degree requirements for CSCE
+# Seed with degree requirements for **ALL**
 CSV.foreach(major_courses_csv, headers: true) do |row|
-  major = Major.find_by(mname: 'Computer Science')
+  major_name = row['major']
+  course_code = row['course_code']
+  course_number = row['course_number']
+  sem = row['rec_sem']
 
-  course_code = row['course_code'].truncate(30)
-
-  requirement = Course.find_or_create_by(
-    cnumber: row['course_number'],
-    ccode: course_code
-  )
-  if requirement.present?
-    DegreeRequirement.find_or_create_by(
-      major:,
-      sem: row['rec_sem']
-    )
+  # Find the correct major
+  major = Major.find_by(mname: major_name)
+  unless major
+    puts "⚠️ Major not found: #{major_name}"
+    next
   end
+
+  # Find or create the course
+  course = Course.find_or_create_by(
+    ccode: course_code,
+    cnumber: course_number
+  )
+
+  unless course
+    puts "⚠️ Course not found: #{course_code} #{course_number}"
+    next
+  end
+
+  DegreeRequirement.find_or_create_by(
+    major: major,
+    course: course,
+    sem: sem
+  )
 end
 
 # Seed with track fulfilling courses
