@@ -87,8 +87,15 @@ class ScheduleController < ApplicationController
   def save_class
     c = ClassAttribute.find(params[:save_id])
     shed = Schedule.find_or_create_by!(semester: params[:semester_num], student_google_id: params[:student_id])
-    unless shed.schedule_classes.find_by(class_attribute_id:params[:save_id])
-      shed.schedule_classes.create(class_attribute_id:params[:save_id])
+    new_class = shed.schedule_classes.create(class_attribute_id: params[:save_id])
+    unless new_class.persisted?
+      existing_class = shed.schedule_classes.joins(:class_attribute)
+                                            .where(class_attributes: { course_id: c.course_id })
+                                            .first
+      if existing_class
+        existing_class.destroy
+        shed.schedule_classes.create!(class_attribute_id: params[:save_id]) 
+      end           
     end
   end
 

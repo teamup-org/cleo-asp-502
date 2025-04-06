@@ -1,5 +1,5 @@
 
-<%= form_with url: schedule_path, method: :get, html: { class: "inline-form", id: "schedule-form-#{c.id}" } do |form| %>
+<%= form_with url: schedule_path, method: :get,remote: true, html: { class: "inline-form", id: "schedule-form-#{c.id}" } do |form| %>
   <%= form.hidden_field :semester_num, value: params[:semester_num] %>
   <%= form.hidden_field :student_id, value: params[:student_id] %>
   <%= form.hidden_field :class_ids, value: @selected_class_ids.join(',') %>
