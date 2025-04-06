@@ -32,6 +32,12 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
+
+    if @student.major.mname != 'Computer Science'
+      @student.track = Track.find(5)
+      @student.emphasis = Emphasis.find(5)
+    end
+
     if @student.save
       # Query the DegreeRequirements table based on the student's major_id
       degree_requirements = DegreeRequirement.where(major_id: @student.major_id)
