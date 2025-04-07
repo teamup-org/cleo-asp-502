@@ -23,15 +23,15 @@ module UserLoginHelper
       grad_year: 2024,
       enrol_semester: 0,
       grad_semester: 1,
-      major: Major.create!(mname: 'Computer Science', cname: 'Engineering')
+      major: Major.create!(mname: 'Computer Science', cname: 'Engineering'),
+      academic_standing: 'good',
+      preference_online: false
     )
 
     # Stub Student.find to return the correct student
     allow(Student).to receive(:find).with('123456789').and_return(student)
     allow(Student).to receive(:find_by).with(google_id: '123456789').and_return(student)
   end
-
-
 
   def mock_current_student_login_admin
     student_login = instance_double(
