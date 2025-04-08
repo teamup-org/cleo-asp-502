@@ -351,4 +351,8 @@ th {
   flex-direction: row;
   gap: 20px;
 }
+html {
+  --user-font-scale: 1;
+  font-size: calc(16px * var(--user-font-scale));
+}
 @import 'select2';

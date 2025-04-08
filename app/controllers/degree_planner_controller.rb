@@ -8,45 +8,31 @@ class DegreePlannerController < ApplicationController
 
   def show
     @default_plan = DegreeRequirement.includes(:course).where(major: @student.major)
+  
     @student_courses = StudentCourse.includes(:course).where(student: @student).order(:sem)
+  
+    scheduled_course_ids = @student_courses.map(&:course_id)
+  
+    recommended_courses = @default_plan.map(&:course).reject do |course|
+      scheduled_course_ids.include?(course.id) 
+    end
+  
+    @recommended_courses = recommended_courses
+  
     @course_prerequisite_status = check_prerequisites(@student, @student_courses)
-    
-    # Calculate earliest semester for each course
     @earliest_semesters = {}
     @student_courses.each do |student_course|
       @earliest_semesters[student_course.course.id] = earliest_semester_for_course(@student, student_course.course)
     end
-
-    # Calculate tooltip content for each course
+  
     @tooltip_contents = {}
     @course_prerequisite_status.each do |course_status|
       student_course = course_status[:student_course]
       @tooltip_contents[student_course.course.id] = tooltip_content(student_course, course_status)
     end
-    
+  
     @emphasis_options = Emphasis.all.pluck(:ename)
     @track_options = Track.all.pluck(:tname)
-    finder_param = search_params
-    finder_param[:student] = @student.id
-    @courses = CourseFinder.transcript_call(finder_param)
-  end
-
-  def index
-    courses = CourseFinder.call(search_params)
-    render json: courses
-  end
-
-  def add_course
-    @student_course = StudentCourse.new(student_id: current_student.id, course_id: params[:course_id],
-                                        sem: params[:sem])
-
-    if @student_course.save
-      flash[:success] = 'Course added successfully!'
-      redirect_to degree_planner_path
-    else
-      flash[:error] = 'Error adding course.'
-      render :show
-    end
   end
 
   def clear_courses
@@ -173,7 +159,7 @@ class DegreePlannerController < ApplicationController
   end
 
   def search_params
-    params.permit(:search, :ccode, :cnumber, :credit_hours, :sort_by, :direction)
+    params.permit(:ccode, :cnumber, :credit_hours, :sort_by, :direction, :page)
   end
 
   def generate_plan_based_on_interests(interests); end
@@ -192,62 +178,62 @@ class DegreePlannerController < ApplicationController
   def check_prerequisites(student, courses)
     courses_added = student.student_courses.includes(:course)
     courses_by_semester = courses_added.group_by(&:sem)
-  
+
     courses.map do |student_course|
       course = student_course.course
       current_semester = student_course.sem
-  
+
       # Get all courses planned in previous semesters
       previous_courses = courses_by_semester
                          .select { |sem, _| sem < current_semester } # Only semesters before the current one
                          .values
                          .flatten
                          .map(&:course)
-  
+
       # Get prerequisite groups for the current course
       prereq_groups = course.prerequisite_groups
-  
+
       # Initialize arrays to track prerequisite status and missing prerequisites
       prerequisite_status = []
       missing_prereqs = []
-  
+
       prereq_groups.each do |equi_id, prereq_courses|
         # Track the status of each prerequisite in this group
         status = {
-          equi_id: equi_id,
+          equi_id:,
           courses: prereq_courses.map do |prereq|
             {
               course: prereq,
               status: if previous_courses.include?(prereq)
-                       'taken'
-                     elsif courses_added.map(&:course).include?(prereq)
-                       'planned'
-                     else
-                       'not_planned'
-                     end
+                        'taken'
+                      elsif courses_added.map(&:course).include?(prereq)
+                        'planned'
+                      else
+                        'not_planned'
+                      end
             }
           end
         }
-  
+
         # Count the number of prerequisites that are not planned or not taken
         not_planned_or_not_taken = prereq_courses.count do |prereq|
           !previous_courses.include?(prereq) && !courses_added.map(&:course).include?(prereq)
         end
-  
+
         # If any prerequisites in this group are not planned or not taken, mark as missing
         if not_planned_or_not_taken > 0
           missing_prereqs << {
-            equi_id: equi_id,
+            equi_id:,
             courses: prereq_courses
           }
         end
-  
+
         prerequisite_status << status
       end
-  
+
       {
-        student_course: student_course,
-        prerequisite_status: prerequisite_status,
+        student_course:,
+        prerequisite_status:,
         prerequisites_met: missing_prereqs.empty?, # Prerequisites are met if no missing prerequisites
         missing_prerequisites: missing_prereqs
       }
@@ -257,18 +243,20 @@ class DegreePlannerController < ApplicationController
   def earliest_semester_for_course(student, course)
     courses_added = student.student_courses.includes(:course)
     courses_by_semester = courses_added.group_by(&:sem)
-  
+
     prereq_groups = course.prerequisite_groups
-  
+
     earliest_semester = 1
-  
+
     prereq_groups.each do |equi_id, prereq_courses|
       prereq_courses.each do |prereq|
-        prereq_course_semester = courses_by_semester.find { |sem, courses| courses.map(&:course).include?(prereq) }&.first || 0
+        prereq_course_semester = courses_by_semester.find do |sem, courses|
+          courses.map(&:course).include?(prereq)
+        end&.first || 0
         earliest_semester = [earliest_semester, prereq_course_semester + 1].max
       end
     end
-  
+
     earliest_semester
   end
 
@@ -276,20 +264,20 @@ class DegreePlannerController < ApplicationController
     earliest_semester = earliest_semester_for_course(@student, student_course.course)
     content = "<div class='tooltip-content'>"
     content += "<strong>Earliest Semester:</strong> #{earliest_semester}<br><br>"
-    content += "<strong>Prerequisites:</strong><br>"
-  
+    content += '<strong>Prerequisites:</strong><br>'
+
     course_status[:prerequisite_status].each do |group|
       content += "<div class='prerequisite-group'>"
-      content += "Need one of:<br>"
+      content += 'Need one of:<br>'
       group[:courses].each do |prereq|
         content += "<div class='prerequisite #{prereq[:status]}'>"
         content += "- #{prereq[:course].ccode} #{prereq[:course].cnumber}: #{prereq[:course].cname} (#{prereq[:status]})"
-        content += "</div>"
+        content += '</div>'
       end
-      content += "</div>"
+      content += '</div>'
     end
-  
-    content += "</div>"
+
+    content += '</div>'
     content.html_safe
   end
 
