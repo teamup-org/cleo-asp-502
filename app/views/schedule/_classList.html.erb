@@ -1,5 +1,6 @@
 <div class="classList">
   <h6><%=course.cname%></h6> 
+    <p><%=course.description%></P> 
     <% classes.each do |c, meetings| %>
     <%unless @scheduled_classes[course] == c%>
       <%= render(partial: 'class', locals: {c: c,course: course, isSaved: false}) %>
