@@ -37,7 +37,9 @@ RSpec.shared_context 'models setup', shared_context: :metadata do
       grad_year: 2024,
       enrol_semester: 0,
       grad_semester: 1,
-      major:
+      major:,
+      academic_standing: 'good',
+      preference_online: false
     )
   end
   let(:student_course) { StudentCourse.create(student:, course:, sem: 1) }
