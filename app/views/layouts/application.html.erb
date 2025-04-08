@@ -32,4 +32,24 @@
 <% end -%>
 <% end %>
 <%= yield %>
+
+<!-- Accessibility Widget -->
+<div id="accessibility-widget">
+  <%= image_tag 'universal-access.png', alt: 'Accessibility Settings', id: 'accessibility-toggle' %>
+  <div id="accessibility-menu" style="display: none;">
+    <h4>Accessibility Options</h4>
+    <button onclick="toggleScreenReader()">Toggle Screen Reader</button>
+    <div class="text-size-control">
+        <label for="font-size-slider">Adjust Text Size:</label>
+        <div class="slider-wrapper">
+            <span class="slider-icon">A−</span>
+            <input type="range" id="font-size-slider" min="0.75" max="2" step="0.05" value="1">
+            <span class="slider-icon">A+</span>
+        </div>
+    </div>
+    <button onclick="toggleHighContrast()">Toggle High Contrast</button>
+    <button onclick="toggleMagnifier()">Toggle Magnifier</button>
+  </div>
+</div>
+
 </body>

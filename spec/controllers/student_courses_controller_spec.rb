@@ -18,7 +18,8 @@ RSpec.describe StudentCoursesController, type: :controller do
     let(:major) { Major.create!(mname: 'Test Major1', cname: 'Test Major Full Name1') }
     let(:student) do
       Student.create!(first_name: 'Test', last_name: 'Student', email: 'test1@student.com', google_id: '123457',
-                      enrol_year: 2023, grad_year: 2025, enrol_semester: 'spring', grad_semester: 'spring', major:)
+                      enrol_year: 2023, grad_year: 2025, enrol_semester: 'spring', grad_semester: 'spring',
+                      major:, academic_standing: 'good', preference_online: false)
     end
     let(:course) { Course.create!(cname: 'Test Course1', ccode: 'TESS', cnumber: 102) }
 
@@ -45,7 +46,8 @@ RSpec.describe StudentCoursesController, type: :controller do
     let(:major) { Major.create!(mname: 'Test Major', cname: 'Test Major Full Name') }
     let(:student) do
       Student.create!(first_name: 'Test', last_name: 'Student', email: 'test@student.com', google_id: '123456',
-                      enrol_year: 2023, grad_year: 2025, enrol_semester: 'spring', grad_semester: 'spring', major:)
+                      enrol_year: 2023, grad_year: 2025, enrol_semester: 'spring', grad_semester: 'spring',
+                      major:, academic_standing: 'good', preference_online: false)
     end
     let(:course) { Course.create!(cname: 'Test Course', ccode: 'TEST', cnumber: 101) }
     let!(:student_course) { StudentCourse.create!(student:, course:, sem: '1') }

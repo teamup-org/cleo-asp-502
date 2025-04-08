@@ -15,7 +15,9 @@ RSpec.describe 'StudentCourses', type: :request do
       grad_year: 2024,
       enrol_semester: 1,
       grad_semester: 1,
-      major:
+      major:,
+      academic_standing: 'good',
+      preference_online: false
     )
   end
 

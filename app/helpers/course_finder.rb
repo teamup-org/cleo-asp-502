@@ -2,49 +2,47 @@ class CourseFinder
   DEFAULT_PAGE = 1
   ITEMS_PER_PAGE = 20
 
-  def self.call(params)
-    new(params).call
+  def self.call(params, scope = Course.all)
+    new(params, scope).call
   end
 
-  def self.transcript_call(params)
-    new(params).transcript_call
+  def self.transcript_call(finder_param, recommended_scope)
+    recommended_scope = recommended_scope.apply_filters(finder_param)
+    recommended_scope.sorted(finder_param[:sort_by], finder_param[:direction])
   end
 
-  def initialize(params)
+  def initialize(params, scope)
     @params = params
+    @scope = scope
   end
 
   def call
-    page = params[:page].to_i
-    page = 1 if page < 1 # Ensure page is at least 1
-    offset = (page - 1) * ITEMS_PER_PAGE # Ensure offset is never negative
-
     Course
-      .apply_filters(params)
-      .sorted(params[:sort_by], params[:direction])
+      .apply_filters(@params)
+      .sorted(@params[:sort_by], @params[:direction])
       .limit(ITEMS_PER_PAGE)
-      .offset(offset)
+      .offset(safe_offset)
   end
 
-  def transcript_call
-    page = params[:page].to_i
-    page = 1 if page < 1 # Ensure page is at least 1
-    offset = (page - 1) * ITEMS_PER_PAGE # Ensure offset is never negative
-
-    Course
-      .apply_filters(params)
-      .sorted(params[:sort_by], params[:direction])
+  def transcript_call(scope = Course)
+    scope
+      .apply_filters(@params)
+      .sorted(@params[:sort_by], @params[:direction])
       .limit(ITEMS_PER_PAGE)
-      .offset(offset)
+      .offset(safe_offset)
       .left_joins(:transcript_courses)
-      .where('transcript_courses.student_id IS NULL OR transcript_courses.student_id != ?', params[:student])
+      .where('transcript_courses.student_id IS NULL OR transcript_courses.student_id != ?', @params[:student])
   end
 
   private
 
-  attr_reader :params
+  def safe_offset
+    page = @params[:page].to_i
+    page = DEFAULT_PAGE if page < 1
+    (page - 1) * ITEMS_PER_PAGE
+  end
 
-  def offset
-    ((params[:page].to_i || DEFAULT_PAGE) - 1) * ITEMS_PER_PAGE
+  def scoped
+    scope
   end
 end
