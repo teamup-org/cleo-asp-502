@@ -1,0 +1,83 @@
+#accessibility-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+  
+  #accessibility-toggle {
+    width: 50px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  #accessibility-toggle:hover {
+    transform: scale(1.05);
+  }
+  
+  #accessibility-menu {
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    width: 220px;
+    z-index: 10000;
+  }
+
+  #accessibility-menu h4 {
+    margin-top: 0;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  #accessibility-menu button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 6px;
+    text-align: left;
+    transition: background-color 0.2s;
+    font-size: 14px;
+  }
+
+  #accessibility-menu button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .high-contrast {
+    background-color: black !important;
+    color: rgb(218, 149, 0) !important;
+  }
+  
+  .magnified * {
+    transform: scale(1.2);
+    transform-origin: top left;
+  }
+
+  .text-size-control {
+    margin-top: 16px;
+  }
+  
+  .slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  
+  .slider-wrapper input[type="range"] {
+    flex: 1;
+  }
+  
+  .slider-icon {
+    font-size: 0.9rem;
+    user-select: none;
+  } 
+  
