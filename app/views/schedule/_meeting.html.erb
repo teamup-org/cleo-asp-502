@@ -3,52 +3,52 @@
         <h6>Sunday</h6>
         <%if meeting.sunday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M")+" -"%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time%>
+            <%=meeting.end_time%>
         <%end%>
     </div>
     <div>
         <h6>Monday</h6>
         <%if meeting.monday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M")+" -"%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time.to_fs%>
+            <%=meeting.end_time.to_fs%>
         <%end%>
     </div>
         <h6>Tueday</h6>
         <%if meeting.tuesday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M"+" -")%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time%>
+            <%=meeting.end_time%>
         <%end%>
     <div>
         <h6>Wednesday</h6>
         <%if meeting.wednesday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M")+" -"%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time%>
+            <%=meeting.end_time%>
         <%end%>
     </div>
         <h6>Thursday</h6>
         <%if meeting.thursday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M")+" -"%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time%>
+            <%=meeting.end_time%>
         <%end%>
     <div>
         <h6>Friday</h6>
         <%if meeting.friday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M")+" -"%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time%>
+            <%=meeting.end_time%>
         <%end%>
     </div>
     <div>
         <h6>Sunday</h6>
         <%if meeting.saturday%>
             <%=meeting.location%>
-            <%=meeting.start_time.strftime("%-l:%M")+" -"%>
-            <%=meeting.end_time.strftime("%-l:%M")%>
+            <%=meeting.start_time%>
+            <%=meeting.end_time%>
         <%end%>
     </div>
 </div>
