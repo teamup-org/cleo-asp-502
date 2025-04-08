@@ -98,6 +98,7 @@ class DegreePlannerController < ApplicationController
     respond_to do |format|
       format.html { redirect_to student_degree_planner_path(@student) }
       format.json { head :no_content }
+      format.js
     end
   end
 
