@@ -51,25 +51,29 @@ class DegreePlannerService
     grouped_requirements = group_requirements_by_type(degree_requirements)
 
     # Add all compulsory degree requirements
-    grouped_requirements[:compulsory].each do |record|
+    compulsory_reqs = grouped_requirements[:compulsory] || []
+    compulsory_reqs.each do |record|
       @courses << { course_id: record.course_id, sem: record.sem }
     end
 
-    add_ucc_courses(grouped_requirements[:ucc_elective])
-    add_emphasis_courses(grouped_requirements[:emphasis_elective])
-    add_track_courses(grouped_requirements[:cs_elective])
-    add_general_courses(grouped_requirements[:general_elective])
-    add_science_courses(grouped_requirements[:science_elective])
+    add_ucc_courses(grouped_requirements[:ucc_elective] || [])
+    add_emphasis_courses(grouped_requirements[:emphasis_elective] || [])
+    add_track_courses(grouped_requirements[:cs_elective] || [])
+    add_general_courses(grouped_requirements[:general_elective] || [])
+    add_science_courses(grouped_requirements[:science_elective] || [])
   end
 
   def add_ucc_courses(ucc_elective)
+    return if ucc_elective.nil? || ucc_elective.empty?
+
     category_count = Hash.new(0)
 
     # Fulfills the minimum requirements from each core category
     @category_min.each do |category, min_courses|
       core_category = CoreCategory.find_by(cname: category)
       courses_core_category = CourseCoreCategory.where(core_category_id: core_category.id)
-      ordered_eligible_courses = order_min_prereqs('course_core_categories', 'core_category_id', courses_core_category)
+      ordered_eligible_courses = order_min_prereqs('course_core_categories', 'core_category_id',
+                                                   courses_core_category)
 
       ordered_eligible_courses.each do |course_core_category|
         break if category_count[category] >= min_courses
@@ -103,6 +107,8 @@ class DegreePlannerService
   end
 
   def add_emphasis_courses(emphasis_elective)
+    return if emphasis_elective.nil? || emphasis_elective.empty?
+
     if @emphasis_area
       emphasis_id = Emphasis.where(ename: @emphasis_area)
       eligible_courses = CourseEmphasis.where(emphasis_id:)
@@ -111,12 +117,10 @@ class DegreePlannerService
       emphasis_elective.each_with_index do |elective, index|
         course = ordered_eligible_courses[index]
         break unless course
-        
-        if @courses.none? { |c| c[:course_id] == course.course_id }
-          @courses << { course_id: course.course_id, sem: elective.sem }
-        else
-          next
-        end
+
+        next unless @courses.none? { |c| c[:course_id] == course.course_id }
+
+        @courses << { course_id: course.course_id, sem: elective.sem }
       end
     else # If there is no emphasis area, we insert back the placeholder modules
       emphasis_elective.each do |elective|
@@ -126,6 +130,7 @@ class DegreePlannerService
   end
 
   def add_track_courses(cs_elective)
+    # return if emphasis_elective.nil? || emphasis_elective.empty?
     if @track_area
       track_id = Track.where(tname: @track_area)
       eligible_courses = CourseTrack.where(track_id:)
@@ -135,12 +140,10 @@ class DegreePlannerService
         puts ordered_eligible_courses[index].inspect
         course = ordered_eligible_courses[index]
         break unless course
-        
-        if @courses.none? { |c| c[:course_id] == course.course_id }
-          @courses << { course_id: course.course_id, sem: elective.sem }
-        else
-          next
-        end
+
+        next unless @courses.none? { |c| c[:course_id] == course.course_id }
+
+        @courses << { course_id: course.course_id, sem: elective.sem }
       end
     else # If there is no track area, we insert back the placeholder modules
       cs_elective.each do |elective|
@@ -150,12 +153,16 @@ class DegreePlannerService
   end
 
   def add_general_courses(general_elective)
+    return if general_elective.nil? || general_elective.empty?
+
     general_elective.each do |elective|
       @courses << { course_id: elective.course_id, sem: elective.sem }
     end
   end
 
   def add_science_courses(science_elective)
+    return if science_elective.nil? || science_elective.empty?
+
     science_elective.each do |elective|
       @courses << { course_id: elective.course_id, sem: elective.sem }
     end
@@ -171,12 +178,11 @@ class DegreePlannerService
   def order_min_prereqs(table_name, id_name, courses)
     safe_table_name = ActiveRecord::Base.connection.quote_table_name(table_name)
     safe_id_name = ActiveRecord::Base.connection.quote_column_name(id_name)
-  
+
     courses
       .joins("LEFT JOIN prerequisites ON #{safe_table_name}.course_id = prerequisites.course_id")
       .select("#{safe_table_name}.course_id", "#{safe_table_name}.#{safe_id_name}", 'COUNT(prerequisites.prereq_id) AS prereq_count')
       .group("#{safe_table_name}.course_id", "#{safe_table_name}.#{safe_id_name}")
       .order('prereq_count ASC')
   end
-  
 end
