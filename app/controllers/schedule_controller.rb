@@ -1,13 +1,11 @@
 class ScheduleController < ApplicationController
   def create
-    schedule_path() 
+    schedule_path()
   end
   helper_method :get_emoji
 
   def get_emoji(course, klass)
-    unless course==nil || klass ==nil 
-    return @course_class_emoji_map[course][klass];
-    end
+    return @course_class_emoji_map[course][klass]
   end
 
   def check_time_boolean(meeting1, meeting2)
@@ -32,7 +30,7 @@ class ScheduleController < ApplicationController
        return check_day_boolean(meeting1,meeting2) && check_time_boolean(meeting1,meeting2)
   end
 
-  def check_class_array_times(classes, otherClasses, dontAdd=false)
+  def check_class_array_times(classes, otherClasses)
     if !classes || !otherClasses
       return
     end
@@ -48,29 +46,28 @@ class ScheduleController < ApplicationController
           otherMeetings.each do |m|
             if(check_meeting_time_overlap(sm,m))
               found = true
-              unless dontAdd
               @course_class_emoji_map[c.course][c].push(@course_class_emoji_map[sc.course][sc][0].to_s)
-              end
-              if dontAdd
-                return true
-              end
+              puts "FOUND OVERLAP"
+              break
             end
           end
         end
       end
     end
-    return false
   end
 
   def selected_classes
+    puts 
     if params[:class_ids]
       select_id = params[:select_class].to_i
       @selected_class_ids = params[:class_ids].split(',').map(&:to_i)
       if @selected_class_ids.include?(select_id)
         @selected_class_ids.delete(select_id)
+        puts "PGPG"
       else
         @selected_class_ids.push(select_id)
       end
+      @all_selected_classes = []
       first = true
       @selected_class_ids.each do |id|
         c = ClassAttribute.find(id)
@@ -90,23 +87,9 @@ class ScheduleController < ApplicationController
   def save_class
     c = ClassAttribute.find(params[:save_id])
     shed = Schedule.find_or_create_by!(semester: params[:semester_num], student_google_id: params[:student_id])
-    scheduled_classes = shed.schedule_classes.joins(:class_attribute).to_a
-    if(check_class_array_times([c], scheduled_classes,true))
-      flash[:alert] = ("Class cannot be added to schedule. Time conflict with already sceduled class.")
-      return
+    unless shed.schedule_classes.find_by(class_attribute_id:params[:save_id])
+      shed.schedule_classes.create(class_attribute_id:params[:save_id])
     end
-    new_class = shed.schedule_classes.create(class_attribute_id: params[:save_id])
-    unless new_class.persisted?
-      existing_class = shed.schedule_classes.joins(:class_attribute)
-                                            .where(class_attributes: { course_id: c.course_id })
-                                            .first
-      if existing_class
-        existing_class.destroy
-        shed.schedule_classes.create!(class_attribute_id: params[:save_id]) 
-        flash[:notice] = ("Class already exists in schedule. Removed existing class and added new class.")
-      end           
-    end
-    flash[:notice] = ("Class added to schedule.")
   end
 
   def remove_class
@@ -124,9 +107,6 @@ class ScheduleController < ApplicationController
     shed = Schedule.find_or_create_by!(semester: params[:semester_num], student_google_id: params[:student_id])
     shed.schedule_classes.each do |c|
       @scheduled_classes[c.class_attribute.course] = c.class_attribute
-      if !@all_selected_classes.include?(c.class_attribute)
-          @all_selected_classes.push(c.class_attribute)
-      end
     end
   end
 def index
@@ -154,7 +134,6 @@ def index
   @selected_class_course = {}
   @selected_class_ids = []
   @course_class_emoji_map = {}
-  @all_selected_classes = []
   selected_classes()
   if params[:save_id].present?
     if !remove_class()

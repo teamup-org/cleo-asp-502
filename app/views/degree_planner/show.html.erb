@@ -106,27 +106,11 @@
       Grid layout for displaying each semester.
       Each semester contains a table of courses that are already added to that semester.
     %>
-        <%
-            def next_semester(date)
-                season,year = date.split
-                year = year.to_i
-                if(season == "spring")
-                    season = "fall"
-                else
-                    season = "spring"
-                    year+=1
-                end
-                return season+" "+year.to_s
-            end
-        %>
         <div class="degreeplan2-grid">
-            <% date = @student.enrol_semester+" "+@student.enrol_year.to_s 
-            (1..8).each do |sem| 
-            %>
-                <div class="semester2-container">
-                                <%= link_to "View Schedule", schedule_path(student_id: @student.id.to_s, semester_num: sem), method: :get, class: "btn btn-primary" %>
-                <h3>Semester <%=sem.to_s+"  ("+date+")"%>:</h3>
-
+            <% (1..8).each do |sem| %>
+            <div class="semester2-container">
+                <%= link_to "View Schedule", schedule_path(student_id: @student.id.to_s, semester_num: sem), method: :get, class: "btn btn-primary" %>
+                <h3>Semester <%= sem %>:</h3>
                 <table>
                     <thead>
                         <tr>
@@ -165,9 +149,6 @@
                         <% end %>
                     </tbody>
                 </table>
-                </div>
-            <%date = next_semester(date)%>
-            <% end %>
             </div>
             <% end %>
         </div>
