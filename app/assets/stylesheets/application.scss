@@ -317,7 +317,19 @@ th {
   display:flex;
   flex-direction: column;
   gap: 6px;
-
+}
+.meetingList{
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.meetingList > p{
+  display:flex;
+  flex-direction: column;
 
 }
 .schedule{
