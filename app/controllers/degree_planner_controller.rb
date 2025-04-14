@@ -16,6 +16,32 @@ class DegreePlannerController < ApplicationController
     recommended_courses = @default_plan.map(&:course).reject do |course|
       scheduled_course_ids.include?(course.id) 
     end
+
+    # Updating sort functionality
+    filter_params = search_params
+
+    # FOR credit_hours
+    if filter_params[:credit_hours].present?
+      recommended_courses.select! { |course| course.credit_hours.to_s == filter_params[:credit_hours] }
+    end
+  
+    # FOR ccode
+    if filter_params[:ccode].present?
+      recommended_courses.select! { |course| course.ccode.downcase.include?(filter_params[:ccode].downcase) }
+    end
+  
+    # FOR cnumber
+    if filter_params[:cnumber].present?
+      recommended_courses.select! { |course| course.cnumber.to_s.include?(filter_params[:cnumber]) }
+    end
+  
+    # FOR column if valid
+    if filter_params[:sort_by].present? && Course.column_names.include?(filter_params[:sort_by])
+      direction = %w[asc desc].include?(filter_params[:direction]) ? filter_params[:direction] : 'asc'
+      recommended_courses.sort_by! { |course| course.send(filter_params[:sort_by]) }
+      recommended_courses.reverse! if direction == 'desc'
+    end
+    # End of sort functionality
   
     @recommended_courses = recommended_courses
   
