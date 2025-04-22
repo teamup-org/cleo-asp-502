@@ -7,7 +7,7 @@ class DegreePlannerController < ApplicationController
   EXPECTED_HEADERS = ['Course ID', 'Course Code', 'Course Number', 'Course Name', 'Credits', 'Semester'].freeze
 
   def show
-    @default_plan = DegreeRequirement.includes(:course).where(major: @student.major)
+    @default_plan = DegreeRequirement.includes(:course).where(major_id: @student.major_id)
   
     @student_courses = StudentCourse.includes(:course).where(student: @student).order(:sem)
   
