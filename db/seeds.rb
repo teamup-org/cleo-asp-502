@@ -90,11 +90,11 @@ CSV.foreach(all_prereq_path, headers: true) do |row|
   course = Course.find_by(ccode: row['course_ccode'], cnumber: row['course_cnumber'])
   prereq = Course.find_by(ccode: row['prereq_ccode'], cnumber: row['prereq_cnumber'])
   next if course.nil? || prereq.nil?
+  Prerequisite.find_or_create_by(
+    equi_id: row['equi_id'],
+    course: course,
+    prereq: prereq
 
-  Prerequisite.find_or_create_by!(
-    course:,
-    prereq:,
-    equi_id: row['equi_id']
   )
 end
 
@@ -105,8 +105,8 @@ all_classes_path = Rails.root.join('lib', 'data','shortData', 'allClassesSpring2
 
 # Seed with classes
 CSV.foreach(all_classes_path, headers: true) do |row|
-  course = Course.find_or_create_by!(ccode: row['ccode'], cnumber: row['cnumber'])
-  ClassAttribute.find_or_create_by!(
+  course = Course.find_or_create_by(ccode: row['ccode'], cnumber: row['cnumber'])
+  ClassAttribute.find_or_create_by(
     crn: row['crn'],
     course:
     # honors: row['honors'] == 'T' ? true : false,
@@ -117,7 +117,7 @@ all_meetings_path = Rails.root.join('lib', 'data','shortData', 'allClassMeetings
 
 # Seed with classtimes
 CSV.foreach(all_meetings_path, headers: true) do |row|
-  klass = ClassAttribute.find_or_create_by!(crn: row['crn'])
+  klass = ClassAttribute.find_or_create_by(crn: row['crn'])
   if klass.nil?
     puts "Skipping row: CRN #{row['crn']} not found in ClassAttributes"
     next
@@ -341,17 +341,17 @@ ClassAttribute.find_each do |klass|
     end
     foundExamination = true if meet.location == 'null' && meet.meeting_type == 'Examination'
   end
-  klass.update!(class_type: 'asyncronous', is_online: true) if !foundMeetingTime && !foundExamination
-  klass.update!(class_type: 'asyncronous with exam', is_online: true) if !foundMeetingTime && foundExamination
+  klass.update(class_type: 'asyncronous', is_online: true) if !foundMeetingTime && !foundExamination
+  klass.update(class_type: 'asyncronous with exam', is_online: true) if !foundMeetingTime && foundExamination
   if foundOnlineLocation && !foundPhysicalLocation && foundMeetingTime
-    klass.update!(class_type: 'online', is_online: true)
+    klass.update(class_type: 'online', is_online: true)
 
   end
   if foundOnlineLocation && foundPhysicalLocation && foundMeetingTime
-    klass.update!(class_type: 'hybrid', is_online: false)
+    klass.update(class_type: 'hybrid', is_online: false)
   end
   if !foundOnlineLocation && foundPhysicalLocation && foundMeetingTime
-    klass.update!(class_type: 'in-person', is_online: false)
+    klass.update(class_type: 'in-person', is_online: false)
 
   end
 end
